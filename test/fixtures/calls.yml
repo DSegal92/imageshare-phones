@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  target: MyString
+  origin: MyString
+  length: MyString
+  times_called: 1
+  was_connected: false
+  caller_ID: MyString
+  location: MyString
+  notes: MyText
+  answered_id: 
+
+two:
+  target: MyString
+  origin: MyString
+  length: MyString
+  times_called: 1
+  was_connected: false
+  caller_ID: MyString
+  location: MyString
+  notes: MyText
+  answered_id: 

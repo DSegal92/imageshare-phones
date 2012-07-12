@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  identity: MyString
+  was_target: false
+  elapsed: MyString
+  call_id: 1
+  phone_id: 1
+
+two:
+  identity: MyString
+  was_target: false
+  elapsed: MyString
+  call_id: 1
+  phone_id: 1
