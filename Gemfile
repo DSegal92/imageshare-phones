@@ -6,6 +6,7 @@ gem 'rails', '3.2.5'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem "activeadmin", :git => "git://github.com/gregbell/active_admin.git"
+gem "formtastic", "~> 2.1.1"
 
 group :production do
 	gem 'pg'
