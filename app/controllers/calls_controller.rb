@@ -1,6 +1,7 @@
 class CallsController < ApplicationController
   def index
-    initial_text = params["session"]
-    @test = "sadfk"
+    Tropo::Generator.say 'Hello World!'
   end
+
+ 
  end
