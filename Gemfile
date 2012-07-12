@@ -7,6 +7,7 @@ gem 'rails', '3.2.5'
 
 gem "activeadmin", :git => "git://github.com/gregbell/active_admin.git"
 gem "formtastic", "~> 2.1.1"
+gem 'tropo-webapi-ruby'
 
 group :production do
 	gem 'pg'

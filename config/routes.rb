@@ -1,7 +1,15 @@
 ImagesharePhones::Application.routes.draw do
+  get "home/index"
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
+
+  resources :answered_calls
+  resources :calls
+  resources :groups
+  resources :phones
+
+  root :to => "home#index"
 
 
   # The priority is based upon order of creation:
