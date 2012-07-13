@@ -6,11 +6,11 @@ class CallsController < ApplicationController
   end
 
   def new
-  	newcall = Call.create
-  		newcall.target= params[:destination]
+  	newcall = Call.create {newcall.target= params[:destination]
   		newcall.origin = params[:origin]
   		nwecall.caller_ID = params[:callerID]
-  		newcall.save
+  		newcall.save}
+  		
   end
 
  end
