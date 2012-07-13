@@ -8,8 +8,4 @@ class CallsController < ApplicationController
   def new
   end
 
-  # POST /calls/post_call
-  def post_call
-  end
-
  end
