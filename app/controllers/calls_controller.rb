@@ -10,7 +10,9 @@ class CallsController < ApplicationController
   		newcall.target= params[:destination]
   		newcall.origin = params[:origin]
   		newcall.caller_ID = params[:callerID]
-  		@elapsed = params[:ended] + '-' + params[:started]
+  		@end_time = params[:ended]
+  		@start_time = params[:started]
+  		@elapsed = @end_time - @start_time
   		newcall.length = @elapsed.to_i
   		newcall.save  		
   end
