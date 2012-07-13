@@ -13,7 +13,6 @@ ImagesharePhones::Application.routes.draw do
 
   match '/call' => 'call#index', :via => :post
   match '/call/new' => 'call#new', :via => :post
-  match '/call/:id/edit' => 'call#edit', :via => :post
   match '/call/:id' => 'call#show', :via => :post
 
 
