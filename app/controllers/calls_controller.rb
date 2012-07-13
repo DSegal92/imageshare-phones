@@ -13,7 +13,7 @@ class CallsController < ApplicationController
   		@end_time = params[:ended]
   		@start_time = params[:started]
   		@elapsed = @end_time.to_f - @start_time.to_f
-  		newcall.length = @elapsed.to_i
+  		newcall.length = @elapsed
   		newcall.save  		
   end
 
