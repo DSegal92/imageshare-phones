@@ -6,7 +6,6 @@ class CallsController < ApplicationController
   end
 
   def new
-  	v = Tropo::Generator.parse request.env["rack.input"].read
   	newcall = Call.create 
   		newcall.target= params[:destination]
   		newcall.origin = params[:origin]
