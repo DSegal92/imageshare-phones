@@ -11,6 +11,8 @@ ImagesharePhones::Application.routes.draw do
 
   root :to => "home#index"
 
+  match '/calls/post_call' => 'calls#post_call'
+
 
 
   # The priority is based upon order of creation:
