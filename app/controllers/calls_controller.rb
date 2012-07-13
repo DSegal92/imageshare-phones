@@ -1,7 +1,10 @@
 class CallsController < ApplicationController
   def index
-    Tropo::Generator.say 'Hello World!'
   end
 
- 
+  # POST /calls/post_call
+  def post_call
+  	@test = '123'
+  end
+
  end
