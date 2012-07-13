@@ -6,12 +6,12 @@ class CallsController < ApplicationController
   end
 
   def new
+  	v = Tropo::Generator.parse request.env["rack.input"].read
   	newcall = Call.create 
   		newcall.target= params[:destination]
   		newcall.origin = params[:origin]
   		newcall.caller_ID = params[:callerID]
-  		elapsed = params[:endT] - params[:start]
-  		newcall.length = elapsed.to_i + " s"
+  		newcall.length = v[:result][:session_duration]
   		newcall.save  		
   end
 
