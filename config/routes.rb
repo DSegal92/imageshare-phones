@@ -11,7 +11,10 @@ ImagesharePhones::Application.routes.draw do
 
   root :to => "home#index"
 
-  match '/calls/post_call' => 'calls#post_call'
+  match '/call' => 'call#index', :via => :post
+  match '/call/new' => 'call#new', :via => :post
+  match '/call/:id/edit' => 'call#edit', :via => :post
+  match '/call/:id' => 'call#show', :via => :post
 
 
 
@@ -19,18 +22,18 @@ ImagesharePhones::Application.routes.draw do
   # first created -> highest priority.
 
   # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
+  #   match 'call/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  #   match 'call/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  #   resources :call
 
   # Sample resource route with options:
-  #   resources :products do
+  #   resources :call do
   #     member do
   #       get 'short'
   #       post 'toggle'
@@ -42,13 +45,13 @@ ImagesharePhones::Application.routes.draw do
   #   end
 
   # Sample resource route with sub-resources:
-  #   resources :products do
+  #   resources :call do
   #     resources :comments, :sales
   #     resource :seller
   #   end
 
   # Sample resource route with more complex sub-resources
-  #   resources :products do
+  #   resources :call do
   #     resources :comments
   #     resources :sales do
   #       get 'recent', :on => :collection
@@ -57,9 +60,9 @@ ImagesharePhones::Application.routes.draw do
 
   # Sample resource route within a namespace:
   #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
+  #     # Directs /admin/call/* to Admin::callController
+  #     # (app/controllers/admin/call_controller.rb)
+  #     resources :call
   #   end
 
   # You can have the root of your site routed with "root"
