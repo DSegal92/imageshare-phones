@@ -6,6 +6,9 @@ class CallsController < ApplicationController
   end
 
   def new
+  	newcall = Call.create
+  		newcall.destination = params[:destination]
+  		newcall.save
   end
 
  end
