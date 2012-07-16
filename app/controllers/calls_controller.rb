@@ -1,6 +1,6 @@
 class CallsController < ApplicationController
   def index
-    render :json => {:test => 1}
+    render :json => {1}
   
   end
 
