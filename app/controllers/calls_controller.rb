@@ -1,9 +1,10 @@
 class CallsController < ApplicationController
   def index
+     @test = "Hello"
   end
 
   def show
-    @test = "Hello"
+
   end
 
   def new
