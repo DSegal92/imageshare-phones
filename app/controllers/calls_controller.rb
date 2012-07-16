@@ -1,6 +1,10 @@
 class CallsController < ApplicationController
   def index
-     @test = "Hello"
+    @test = "Hello"
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @test }
+    end
   end
 
   def show
