@@ -3,6 +3,7 @@ class CallsController < ApplicationController
   end
 
   def show
+    @test = "Hello"
   end
 
   def new
