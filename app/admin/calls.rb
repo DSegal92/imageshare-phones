@@ -1,8 +1,5 @@
 ActiveAdmin.register Call do
-  #attr_accessible :answered_id, :caller_ID, :length, :location, :notes, :origin, :target, :times_called, :was_connected
   index do
-  	timesCalled = Hash.new
-
   	column :id
   	column :target
   	column :caller_ID
