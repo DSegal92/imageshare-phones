@@ -4,7 +4,9 @@ ActiveAdmin.register Call do
   	column :id
   	column :target
   	column :origin
-  	column :length
+  	column "Length (s)" do |call|
+  		call.length
+  	end
   	column :times_called
   	column :was_connected
   	column :caller_ID
