@@ -4,9 +4,22 @@ ActiveAdmin.register Group do
       f.input :identity
       f.input :extension
       f.input :email
+      f.input :startTime, :label => "Start Time (1-24)"
+      f.input :endTime, :label => "End Time (1-24)"
       f.input :phones, :member_label => :identity, :as => :check_boxes
+      
     end
     f.buttons
+  end
+
+  index do
+    column :id
+    column :identity
+    column :extension
+    column :email
+    column :startTime
+    column :endTime
+    default_actions
   end  
 
   show do |ad|
