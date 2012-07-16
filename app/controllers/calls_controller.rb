@@ -12,7 +12,8 @@ class CallsController < ApplicationController
   		newcall.target= params[:destination]
   		newcall.origin = params[:origin]
   		newcall.caller_ID = params[:callerID]
-      newcall.length = params[:started]
+      started = params[:started]
+      newcall.length = started
   		newcall.save  		
   end
 
