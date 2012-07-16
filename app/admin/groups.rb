@@ -4,7 +4,7 @@ ActiveAdmin.register Group do
       f.input :identity
       f.input :extension
       f.input :email
-      f.input :phones, :member_label => :identity
+      f.input :phones, :member_label => :identity, :as => :check_boxes
     end
     f.buttons
   end  

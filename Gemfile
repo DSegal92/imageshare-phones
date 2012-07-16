@@ -5,7 +5,7 @@ gem 'rails', '3.2.5'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem "activeadmin", :git => "git://github.com/gregbell/active_admin.git"
+gem "activeadmin"
 gem "formtastic", "~> 2.1.1"
 gem 'tropo-webapi-ruby'
 
