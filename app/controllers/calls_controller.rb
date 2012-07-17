@@ -3,17 +3,18 @@ class CallsController < ApplicationController
   end
 
   def show
-    count = 0
     # If there is a group with the same extension as a phone, try group first
     if Group.find_by_extension(params[:id])
       time = Time.now.hour
       # Check if there is a group with given extension for current time block
       if Group.find_all_by_extension(params[:id]).select!{|g| 
-        g.startTime < time && g.endTime > time}.nil?
+        g.startTime <= time && g.endTime >= time}.nil?
         # Returns proper JSON if there is only one group for block and current time block
         if Group.find_by_extension(params[:id])
           group = Group.find_by_extension(params[:id])
-          render :json => {:group => group['identity'], :identity => group.phones[count]['identity'], :number => group.phones[count]['number']}
+          count = group.counter
+          render :json => {:group => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
+          group.counter = 1
         else
           # If no time blocks match current block, return a phone with the same extension if one exists
           if Phone.find_by_extension(params[:id])
@@ -26,7 +27,9 @@ class CallsController < ApplicationController
         # Returns proper JSON if there are multiple blocks and only one time matches
         group = Group.find_all_by_extension(params[:id]).select!{|g| 
           g.startTime < time && g.endTime > time}[0]
-          render :json => {:group => group['identity'], :identity => group.phones[count]['identity'], :number => group.phones[count]['number']}
+          count = group.counter
+          render :json => {:group => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number']}
+          group.counter = 1
         end
       # Returns JSON if no extensions match, but a phone matches
       elsif Phone.find_by_extension(params[:id])
