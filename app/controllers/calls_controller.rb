@@ -3,50 +3,51 @@ class CallsController < ApplicationController
   end
 
   def show
-    # If there is a group with the same extension as a phone, try group first
-    if Group.find_by_extension(params[:id])
-      time = Time.now.hour
-      # Check if there is a group with given extension for current time block
-      if Group.find_all_by_extension(params[:id]).select!{|g| 
-        g.startTime <= time && g.endTime >= time}.nil?
-        # Returns proper JSON if there is only one group for block and current time block
-        if Group.find_by_extension(params[:id])
-          group = Group.find_by_extension(params[:id])
-          count = group.counter
-          render :json => {:group => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
-          group.counter = 1
-        else
-          # If no time blocks match current block, return a phone with the same extension if one exists
-          if Phone.find_by_extension(params[:id])
-            render :json => {:phone =>  Phone.find_by_extension(params[:id])["identity"], :number => Phone.find_by_extension(params[:id])["number"]}
-          end
-          # Returns that no such extension exists
-          render :json => {:exists => false}
-        end
-      else
-        # Returns proper JSON if there are multiple blocks and only one time matches
-        group = Group.find_all_by_extension(params[:id]).select!{|g| 
-          g.startTime < time && g.endTime > time}[0]
-          count = group.counter
-          render :json => {:group => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number']}
-          group.counter = 1
-        end
-      # Returns JSON if no extensions match, but a phone matches
-      elsif Phone.find_by_extension(params[:id])
-        render :json => {:phone =>  Phone.find_by_extension(params[:id])["identity"], :number => Phone.find_by_extension(params[:id])["number"]}
-      # Returns False-- no extensions or phones match entered extension
-      else
-        render :json => {:exists => false}
+    time = Time.now.hour
+    group = Group.find_by_extension(params[:id])
+    group_now = Group.find_all_by_extension(params[:id]).select!{|g| g.startTime <= time && g.endTime >= time}
+    phone = Phone.find_by_extension(params[:id])
+    # Check if group w/ extension exists
+    if group
+      # If multiple groups exist, check for one matching the current time
+      if group_now && group_now.size > 0
+        group = group_now[0]
+        count = group.counter
+        render :json => {:group => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
+          incrCounter(group)
+      # Else if only one group exists, check if it matches the current time
+      elsif group && group.startTime <= time && group.endTime >= time
+        count = group.counter
+        render :json => {:group1 => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
+          incrCounter(group)
+      # If no group matches time, but a phone matches extension return phone
+      elsif phone
+        render :json => {:phone => phone["identity"], :number => phone["number"]}
       end
-    end
+    # If no group matches extension, but a phone matches
+    elsif phone
+      render :json => {:phone => phone["identity"], :number => phone["number"]}
+    # If no groups or phone match extension
+    else
+      render :json => {:number => false}
+    end  
+    
+  end
 
-    def new
-     newcall = Call.create      
-     newcall.target= params[:destination]
-     newcall.origin = params[:origin]
-     newcall.caller_ID = params[:callerID]
-     newcall.length = params[:ended].to_i - params[:started].to_i
-     newcall.save  		
-   end
+  def new
+    newcall = Call.create      
+    newcall.target= params[:destination]
+    newcall.origin = params[:origin]
+    newcall.caller_ID = params[:callerID]
+    newcall.length = params[:ended].to_i - params[:started].to_i
+    newcall.save  		
+  end
+
+  def incrCounter(group)
+    group.counter += 1
+      if group.counter >= group.phones.size
+        group.counter = 0
+      end
+  end
 
  end
