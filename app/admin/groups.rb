@@ -8,6 +8,7 @@ ActiveAdmin.register Group do
       f.input :endTime, :label => "End Time (1-24)"
       f.input :counter
       f.input :phones, :member_label => :identity, :as => :check_boxes
+      f.input :enable
       
     end
     f.buttons

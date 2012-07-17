@@ -10,22 +10,24 @@ class CallsController < ApplicationController
     # Check if group w/ extension exists
     if group
       # If multiple groups exist, check for one matching the current time
-      if group_now && group_now.size > 0
+      if group_now && group_now.size > 0 && group.enable
         group = group_now[0]
         count = group.counter
         render :json => {:group => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
           incrCounter(group)
       # Else if only one group exists, check if it matches the current time
-      elsif group && group.startTime <= time && group.endTime >= time
+      elsif group && group.startTime <= time && group.endTime >= time && group.enable
         count = group.counter
         render :json => {:group1 => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
           incrCounter(group)
       # If no group matches time, but a phone matches extension return phone
-      elsif phone
+      elsif phone && phone.enable
         render :json => {:phone => phone["identity"], :number => phone["number"]}
+      else 
+         render :json => {:number => false}
       end
     # If no group matches extension, but a phone matches
-    elsif phone
+    elsif phone && phone.enable
       render :json => {:phone => phone["identity"], :number => phone["number"]}
     # If no groups or phone match extension
     else
