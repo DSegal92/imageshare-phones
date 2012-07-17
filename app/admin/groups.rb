@@ -21,6 +21,9 @@ ActiveAdmin.register Group do
     column :email
     column :startTime
     column :endTime
+    column "Enabled" do |group|
+      group.enable
+    end
     default_actions
   end  
 
