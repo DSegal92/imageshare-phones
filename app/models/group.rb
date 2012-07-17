@@ -10,6 +10,6 @@ class Group < ActiveRecord::Base
         group.counter = 0
       end
      group.save
-     puts "Incremented counter for group "
+     puts "Incremented counter for group " + group.counter.to_s
   end 
  end
