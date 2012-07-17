@@ -21,13 +21,13 @@ class CallsController < ApplicationController
         render :json => {:group1 => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
           group.incrCounter(group)
       # If no group matches time, but a phone matches extension return phone
-      elsif phone && phone.enable
+      elsif phone
         render :json => {:phone => phone["identity"], :number => phone["number"]}
       else 
          render :json => {:number => false}
       end
     # If no group matches extension, but a phone matches
-    elsif phone && phone.enable
+    elsif phone
       render :json => {:phone => phone["identity"], :number => phone["number"]}
     # If no groups or phone match extension
     else

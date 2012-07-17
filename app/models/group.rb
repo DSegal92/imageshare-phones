@@ -6,7 +6,7 @@ class Group < ActiveRecord::Base
 
   def incrCounter(group)
     group.counter += 1
-      if group.counter >= group.phones.size - 1
+      if group.counter >= group.phones.size
         group.counter = 0
       end
      group.save
