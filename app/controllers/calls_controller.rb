@@ -23,7 +23,7 @@ class CallsController < ApplicationController
           group.incrCounter(group)
       # If no group matches time, but a phone matches extension return phone
       elsif phone
-        render :json => {:name => phone["identity"], :identity => phone["identity"] :number => phone["number"]}
+        render :json => {:name => phone["identity"], :identity => phone["identity"], :number => phone["number"]}
       else 
          render :json => {:number => false}
       end
