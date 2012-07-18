@@ -3,19 +3,19 @@ ActiveAdmin.register Call do
   	column :id
   	column "Target", :sortable => :target do |call|
       unless call.target.nil?
-        @searchURL = 'http://localhost:3000/admin/calls?&q%5Btarget_contains%5D=' + call.target
+        @searchURL = '/admin/calls?&q%5Btarget_contains%5D=' + call.target
         link_to call.target, @searchURL
       end
     end
     column "Answered By", :sortable => :answered do |call|
       unless call.answered.nil?
-        @searchURL = 'http://localhost:3000/admin/calls?&q%5Banswered_contains%5D=' + call.answered
+        @searchURL = '/admin/calls?&q%5Banswered_contains%5D=' + call.answered
         link_to call.answered, @searchURL
       end
     end 
   	column "Caller ID", :sortable => :caller_ID do |call|
       unless call.caller_ID.nil?
-        @searchURL = 'http://localhost:3000/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID
+        @searchURL = '/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID
         link_to call.caller_ID, @searchURL
       end
     end
@@ -31,7 +31,7 @@ ActiveAdmin.register Call do
   	end 
   	column "Location", :sortable => :location do |call|
       unless call.location.nil?
-        @searchURL = 'http://localhost:3000/admin/calls?&q%5Blocation_contains%5D=' + call.location
+        @searchURL = '/admin/calls?&q%5Blocation_contains%5D=' + call.location
         link_to call.location, @searchURL
       end
     end
