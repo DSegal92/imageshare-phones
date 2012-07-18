@@ -2,29 +2,43 @@ ActiveAdmin.register Call do
   index do
   	column :id
   	column "Target", :sortable => :target do |call|
-      #'#' = 'http://localhost:3000/admin/calls?&q%5Btarget_contains%5D=' + call.target
-      link_to call.target, '#'
+      unless call.target.nil?
+        @searchURL = 'http://localhost:3000/admin/calls?&q%5Btarget_contains%5D=' + call.target
+        link_to call.target, @searchURL
+      end
     end
     column "Answered By", :sortable => :answered do |call|
-      #'#' = 'http://localhost:3000/admin/calls?&q%5Banswered_contains%5D=' + call.answered
-      link_to call.answered, '#'
+      unless call.answered.nil?
+        @searchURL = 'http://localhost:3000/admin/calls?&q%5Banswered_contains%5D=' + call.answered
+        link_to call.answered, @searchURL
+      end
     end 
   	column "Caller ID", :sortable => :caller_ID do |call|
-      #'#' = 'http://localhost:3000/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID
-      link_to call.caller_ID, '#'
+      unless call.caller_ID.nil?
+        @searchURL = 'http://localhost:3000/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID
+        link_to call.caller_ID, @searchURL
+      end
     end
     column "Times Called" do |call|
-      Call.find_all_by_caller_ID(call.caller_ID).size
+      unless call.caller_ID.nil?
+        Call.find_all_by_caller_ID(call.caller_ID).size
+      end
     end
   	column "Length (s)" do |call|
-  		call.menuLength
+      unless call.length.nil?
+  		  call.menuLength
+      end
   	end 
   	column "Location", :sortable => :location do |call|
-      #'#' = 'http://localhost:3000/admin/calls?&q%5Blocation_contains%5D=' + call.location
-      link_to call.location, '#'
+      unless call.location.nil?
+        @searchURL = 'http://localhost:3000/admin/calls?&q%5Blocation_contains%5D=' + call.location
+        link_to call.location, @searchURL
+      end
     end
   	column "Notes" do |call|
-      call.notes.truncate(10)
+      unless call.notes.nil?
+        call.notes.truncate(10)
+      end
     end
     column :was_connected   
   	column :created_at
