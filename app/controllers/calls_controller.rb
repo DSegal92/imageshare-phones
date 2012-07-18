@@ -43,8 +43,7 @@ class CallsController < ApplicationController
     newcall.target= params[:target]
     newcall.caller_ID = params[:callerID]
     newcall.was_connected = params[:connected]
-    elapsed = params[:ended].to_i - params[:started].to_i
-    newcall.length = elapsed.to_i
+    newcall.length = params[:ended].to_i
     newcall.save	
   end
 
