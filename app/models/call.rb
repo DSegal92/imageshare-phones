@@ -1,3 +1,3 @@
 class Call < ActiveRecord::Base
-  attr_accessible :answered_id, :caller_ID, :length, :location, :notes, :origin, :target, :times_called, :was_connected
+  attr_accessible :answered, :caller_ID, :length, :location, :notes, :origin, :target, :was_connected, :menuLength
 end

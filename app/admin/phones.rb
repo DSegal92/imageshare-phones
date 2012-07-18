@@ -4,9 +4,6 @@ ActiveAdmin.register Phone do
 		column :identity
 		column :number
 		column :extension
-		column "Enabled" do |phone|
-			phone.enable
-		end
 		default_actions
 	end
 

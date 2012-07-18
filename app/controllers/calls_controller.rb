@@ -4,6 +4,7 @@ class CallsController < ApplicationController
 
   def show
     time = Time.now.hour
+    
     group = Group.find_by_extension(params[:id])
     group_now = Group.find_all_by_extension(params[:id]).select!{|g| g.startTime <= time && g.endTime >= time}
     phone = Phone.find_by_extension(params[:id])
@@ -42,6 +43,7 @@ class CallsController < ApplicationController
     newcall.origin = params[:origin]
     newcall.caller_ID = params[:callerID]
     newcall.length = params[:ended].to_i - params[:started].to_i
+    newcall.timesCalled = Call.find_all_by_caller_ID(params[:callerID]).size
     newcall.save  		
   end
 
