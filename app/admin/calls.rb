@@ -2,16 +2,16 @@ ActiveAdmin.register Call do
   index do
   	column :id
   	column "Target", :sortable => :target do |call|
-      @searchURL = 'http://localhost:3000/admin/calls?&q%5Btarget_contains%5D=' + call.target
-      link_to call.target, @searchURL
+      #'#' = 'http://localhost:3000/admin/calls?&q%5Btarget_contains%5D=' + call.target
+      link_to call.target, '#'
     end
     column "Answered By", :sortable => :answered do |call|
-      @searchURL = 'http://localhost:3000/admin/calls?&q%5Banswered_contains%5D=' + call.answered
-      link_to call.answered, @searchURL
+      #'#' = 'http://localhost:3000/admin/calls?&q%5Banswered_contains%5D=' + call.answered
+      link_to call.answered, '#'
     end 
   	column "Caller ID", :sortable => :caller_ID do |call|
-      @searchURL = 'http://localhost:3000/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID
-      link_to call.caller_ID, @searchURL
+      #'#' = 'http://localhost:3000/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID
+      link_to call.caller_ID, '#'
     end
     column "Times Called" do |call|
       Call.find_all_by_caller_ID(call.caller_ID).size
@@ -20,8 +20,8 @@ ActiveAdmin.register Call do
   		call.menuLength
   	end 
   	column "Location", :sortable => :location do |call|
-      @searchURL = 'http://localhost:3000/admin/calls?&q%5Blocation_contains%5D=' + call.location
-      link_to call.location, @searchURL
+      #'#' = 'http://localhost:3000/admin/calls?&q%5Blocation_contains%5D=' + call.location
+      link_to call.location, '#'
     end
   	column "Notes" do |call|
       call.notes.truncate(10)
