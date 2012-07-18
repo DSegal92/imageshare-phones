@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120718183953) do
+ActiveRecord::Schema.define(:version => 20120718160739) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -94,11 +94,6 @@ ActiveRecord::Schema.define(:version => 20120718183953) do
 
   add_index "groups_phones", ["group_id", "phone_id"], :name => "index_groups_phones_on_group_id_and_phone_id"
   add_index "groups_phones", ["phone_id", "group_id"], :name => "index_groups_phones_on_phone_id_and_group_id"
-
-  create_table "phone_maps", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "phones", :force => true do |t|
     t.string   "identity"
