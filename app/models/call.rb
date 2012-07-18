@@ -1,4 +1,4 @@
 class Call < ActiveRecord::Base
-  attr_accessible :answered, :caller_ID, :length, :location, :notes, :origin, :target, :was_connected, :menuLength, :timesCalled, :site
+  attr_accessible :answered, :caller_ID, :location, :notes, :origin, :target, :was_connected, :menuTime, :timesCalled, :site
 
 end

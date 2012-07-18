@@ -25,8 +25,8 @@ ActiveAdmin.register Call do
       end
     end
   	column "Length (s)" do |call|
-      unless call.length.nil?
-  		  call.menuLength
+      unless call.menuTime.nil?
+  		  call.menuTime
       end
   	end 
   	column "Site", :sortable => :site do |call|
@@ -52,7 +52,7 @@ ActiveAdmin.register Call do
      f.input :target
      f.input :answered, :label => "Answered By"
      f.input :caller_ID, :label => "Caller ID"
-     f.input :menuLength, :label => "Time Spent in Menu (s)"
+     f.input :menuTime, :label => "Time Spent in Menu (s)"
      f.input :site, :as => :select, :collection => ["A", "B", "C", "D", "E"]
      f.input :location 
      f.input :notes
@@ -74,7 +74,7 @@ ActiveAdmin.register Call do
           th 'Caller ID'
           td call.caller_ID
           th 'Length In Menu (s)'
-          td call.menuLength
+          td call.menuTime
         tr
           th 'Site'
           td call.site
