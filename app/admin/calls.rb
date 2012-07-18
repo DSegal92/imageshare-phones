@@ -29,12 +29,13 @@ ActiveAdmin.register Call do
   		  call.menuLength
       end
   	end 
-  	column "Location", :sortable => :location do |call|
-      unless call.location.nil?
-        @searchURL = '/admin/calls?&q%5Blocation_contains%5D=' + call.location
-        link_to call.location, @searchURL
+  	column "Site", :sortable => :site do |call|
+      unless call.site.nil?
+        @searchURL = '/admin/calls?&q%5Blocation_contains%5D=' + call.site
+        link_to call.site, @searchURL
       end
     end
+    column :location
   	column "Notes" do |call|
       unless call.notes.nil?
         call.notes.truncate(10)
@@ -52,7 +53,8 @@ ActiveAdmin.register Call do
      f.input :answered, :label => "Answered By"
      f.input :caller_ID, :label => "Caller ID"
      f.input :menuLength, :label => "Time Spent in Menu (s)"
-     f.input :location
+     f.input :site, :as => :select, :collection => ["A", "B", "C", "D", "E"]
+     f.input :location 
      f.input :notes
      f.input :was_connected
      
@@ -74,17 +76,19 @@ ActiveAdmin.register Call do
           th 'Length In Menu (s)'
           td call.menuLength
         tr
+          th 'Site'
+          td call.site
           th 'Location'
           td call.location
+        tr
+          th 'Times Called'
+          td Call.find_all_by_caller_ID(call.caller_ID).size
           th 'Was Connected?'
           if call.was_connected?
             td "True"
           else
             td "False"
           end
-        tr
-          th 'Times Called'
-          td Call.find_all_by_caller_ID(call.caller_ID).size
 
       end  
       table do

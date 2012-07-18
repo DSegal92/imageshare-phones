@@ -19,7 +19,7 @@ class CallsController < ApplicationController
       # Else if only one group exists, check if it matches the current time
       elsif group && group.startTime <= time && group.endTime >= time && group.enable
         count = group.counter
-        render :json => {:group1 => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
+        render :json => {:group => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
           group.incrCounter(group)
       # If no group matches time, but a phone matches extension return phone
       elsif phone
@@ -39,7 +39,7 @@ class CallsController < ApplicationController
 
   def new
     newcall = Call.create      
-    newcall.target= params[:destination]
+    newcall.target= params[:target]
     newcall.caller_ID = params[:callerID]
     newcall.length = params[:ended].to_i - params[:started].to_i
     newcall.save	
