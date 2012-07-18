@@ -43,7 +43,7 @@ class CallsController < ApplicationController
     newcall.target= params[:target]
     newcall.caller_ID = params[:callerID]
     newcall.was_connected = params[:connected]
-    newcall.site = params[:ended]
+    newcall.length = params[:ended]
     newcall.save	
   end
 
