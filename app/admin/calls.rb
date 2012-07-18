@@ -14,7 +14,9 @@ ActiveAdmin.register Call do
       link_to call.caller_ID, @searchURL
     end
     column "Times Called" do |call|
-      call.timesCalled
+      unless timesCalled.nil?
+        call.timesCalled
+      end
     end
   	column "Length (s)" do |call|
   		call.menuLength
