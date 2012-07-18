@@ -42,8 +42,7 @@ class CallsController < ApplicationController
     newcall.target= params[:destination]
     newcall.caller_ID = params[:callerID]
     newcall.length = params[:ended].to_i - params[:started].to_i
-    newcall.timesCalled = Call.find_all_by_caller_ID(params[:callerID]).size
-    newcall.save  		
+    newcall.save	
   end
 
   

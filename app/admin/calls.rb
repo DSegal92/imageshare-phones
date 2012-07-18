@@ -14,9 +14,7 @@ ActiveAdmin.register Call do
       link_to call.caller_ID, @searchURL
     end
     column "Times Called" do |call|
-      unless timesCalled.nil?
-        call.timesCalled
-      end
+      Call.find_all_by_caller_ID(call.caller_ID).size
     end
   	column "Length (s)" do |call|
   		call.menuLength
@@ -70,6 +68,10 @@ ActiveAdmin.register Call do
           else
             td "False"
           end
+        tr
+          th 'Times Called'
+          td Call.find_all_by_caller_ID(call.caller_ID).size
+
       end  
       table do
         tr
