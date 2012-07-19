@@ -41,7 +41,8 @@ ActiveAdmin.register Call do
         call.notes.truncate(10)
       end
     end
-    column :was_connected   
+    column :was_connected
+    column :session   
   	column :created_at
   	column :updated_at
   	default_actions
