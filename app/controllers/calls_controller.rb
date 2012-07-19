@@ -48,7 +48,7 @@ class CallsController < ApplicationController
     newcall.save	
   end
 
-  def new
+  def startCall
     newcall = Call.new
     newcall.answered= 'In Progress'
     newcall.target= 'In Progress'
