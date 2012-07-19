@@ -12,7 +12,8 @@ ImagesharePhones::Application.routes.draw do
   root :to => "home#index"
 
   match '/call' => 'calls#index', :via => :get
-  match '/call/new' => 'calls#new', :via => :post
+  match '/call/newCall' => 'calls#newCall', :via => :post
+  match '/call/finishCall' => 'calls#finishCall', :via => :post
   match '/call/:id' => 'calls#show', :via => :post
 
 
