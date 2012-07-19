@@ -26,7 +26,7 @@ ActiveAdmin.register Call do
     end
   	column "Call Length (s)" do |call|
       unless call.menuTime.nil?
-  		  call.menuTime / 60 + " min " + call.menuTime % 60 + " s"
+  		  call.menuTime.to_i / 60 + " min " + call.menuTime.to_i % 60 + " s"
       end
   	end 
   	column "Site", :sortable => :site do |call|
