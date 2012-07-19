@@ -49,9 +49,14 @@ class CallsController < ApplicationController
   end
 
   def startCall
-    newcall = Call.create
+    newcall = Call.create   
+    newcall.answered= params[:answered]
+    newcall.target= params[:target]
+    newcall.caller_ID = params[:callerID]
+    newcall.was_connected = params[:connected]
+    newcall.menuTime = params[:time]
     newcall.session = params[:session]
-    newcall.save
+    newcall.save  
   end
 
   
