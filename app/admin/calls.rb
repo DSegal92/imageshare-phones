@@ -24,9 +24,9 @@ ActiveAdmin.register Call do
         Call.find_all_by_caller_ID(call.caller_ID).size
       end
     end
-  	column "Length (s)" do |call|
+  	column "Call Length (s)" do |call|
       unless call.menuTime.nil?
-  		  call.menuTime
+  		  call.menuTime / 60 + " min " + call.menuTime % 60 + " s"
       end
   	end 
   	column "Site", :sortable => :site do |call|
