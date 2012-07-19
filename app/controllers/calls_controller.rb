@@ -39,18 +39,18 @@ class CallsController < ApplicationController
 
   def finishCall
     newcall = Call.find_by_session(params[:session])   
-    newcall.answered= params[:answered]
-    newcall.target= params[:target]
-    newcall.caller_ID = params[:callerID]
-    newcall.was_connected = params[:connected]
-    newcall.menuTime = params[:time]
+    
     newcall.session = params[:session]
     newcall.save	
   end
 
   def startCall
     newcall = Call.create   
-    newcall.answered= params[:answered]
+    newcall.answered= 'In Progress'
+    newcall.target= ''
+    newcall.caller_ID = ''
+    newcall.was_connected = ''
+    newcall.menuTime = ''
     newcall.session = params[:session]
     newcall.save  
   end
