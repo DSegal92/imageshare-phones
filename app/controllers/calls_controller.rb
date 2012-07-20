@@ -57,7 +57,7 @@ class CallsController < ApplicationController
     newcall.menuTime = 'In Progress'
     newcall.session = params[:session]
     newcall.save
-    UserMailer.incomingCall().deliver    
+    UserMailer.incomingCall(params[:target], params[:callerID]).deliver    
   end
 
   
