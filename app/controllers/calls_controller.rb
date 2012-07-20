@@ -14,11 +14,17 @@ class CallsController < ApplicationController
       if group_now && group_now.size > 0 && group.enable
         group = group_now[0]
         count = group.counter
+        if count >= group.phones.size
+          count = 0
+        end
         render :json => {:name => group['identity'], :identity => group.phones[count]['identity'], :size => group.phones.size, :number => group.phones[count]['number'] }
           group.incrCounter(group)
       # Else if only one group exists, check if it matches the current time
       elsif group && group.startTime <= time && group.endTime >= time && group.enable
         count = group.counter
+        if count >= group.phones.size
+          count = 0
+        end
         render :json => {:identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
           group.incrCounter(group)
       # If no group matches time, but a phone matches extension return phone
