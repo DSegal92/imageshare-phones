@@ -8,6 +8,7 @@ gem 'rails', '3.2.5'
 gem "activeadmin"
 gem "formtastic", "~> 2.1.1"
 gem 'tropo-webapi-ruby'
+gem 'json'
 
 group :production do
 	gem 'pg'

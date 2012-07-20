@@ -1,3 +1,5 @@
+require 'net/http'
+
 class Call < ActiveRecord::Base
   attr_accessible :answered, :caller_ID, :location, :notes, :origin, :target, :was_connected, :menuTime, :timesCalled, :site
   def getTime(time)
@@ -19,5 +21,10 @@ class Call < ActiveRecord::Base
 			end
 	hourPrint + ':' + minutePrint + ':' + secondPrint
 	
+  end
+
+  def getSites
+  	#resp = #{curl https://ace.sharemedicalimages.com/admin/site/list}
+    #@result = JSON.parse(resp)
   end
 end

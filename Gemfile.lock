@@ -155,6 +155,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   formtastic (~> 2.1.1)
   jquery-rails
+  json
   pg
   rails (= 3.2.5)
   sass-rails (~> 3.2.3)
