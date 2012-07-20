@@ -56,7 +56,8 @@ class CallsController < ApplicationController
     newcall.was_connected = 'In Progress'
     newcall.menuTime = 'In Progress'
     newcall.session = params[:session]
-    newcall.save  
+    newcall.save
+    UserMailer.incomingCall().deliver    
   end
 
   
