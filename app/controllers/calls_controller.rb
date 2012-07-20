@@ -19,7 +19,7 @@ class CallsController < ApplicationController
       # Else if only one group exists, check if it matches the current time
       elsif group && group.startTime <= time && group.endTime >= time && group.enable
         count = group.counter
-        render :json => {:name => group}
+        render :json => {:name => group.phones}
           group.incrCounter(group)
       # If no group matches time, but a phone matches extension return phone
       elsif phone
