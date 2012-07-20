@@ -7,7 +7,7 @@ default from: "postmaster@vigilantnotifier.mailgun.org"
     call = Call.find_by_session(sessionID)
     @target = target
     @caller = caller
-  	mail(to: 'DSegal92@gmail.com', :subject => "New Call for " + target + " " + call.id.to_s)
+  	mail(to: 'DSegal92@gmail.com', :subject => "New Call for " + target)
   end
 
    
