@@ -3,8 +3,8 @@ class CallsController < ApplicationController
   end
 
   def show
-    time = Time.now.hour
-    
+
+    time = Time.now.hour    
     group = Group.find_by_extension(params[:id])
     group_now = Group.find_all_by_extension(params[:id]).select!{|g| g.startTime <= time && g.endTime >= time}
     phone = Phone.find_by_extension(params[:id])
@@ -57,8 +57,13 @@ class CallsController < ApplicationController
     newcall.menuTime = 'In Progress'
     newcall.session = params[:session]
     newcall.save
-    UserMailer.incomingCall(params[:target], params[:callerID]).deliver    
+    UserMailer.incomingCall(params[:target], params[:callerID], params[:session]).deliver    
   end
+
+  def getSites
+  data = @http.get "/calls/" + ext.to_s, {}
+  JSON.parse(data)
+end
 
   
 
