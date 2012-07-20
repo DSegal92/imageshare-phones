@@ -13,8 +13,6 @@ ActiveAdmin.register Phone do
 			f.input :extension
 			f.input :number
 			f.input :groups , :as => :check_boxes, :member_label => :identity
-			f.input :enable
-	
 		end
 		f.buttons
 	end 
