@@ -40,7 +40,6 @@ ActiveAdmin.register Call do
       end
     end
     column :was_connected
-    column :session   
     column :created_at
     column :updated_at
     default_actions
