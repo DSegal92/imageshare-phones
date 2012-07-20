@@ -51,8 +51,8 @@ class CallsController < ApplicationController
   def startCall
     newcall = Call.new
     newcall.answered= 'In Progress'
-    newcall.target= 'In Progress'
-    newcall.caller_ID = 'In Progress'
+    newcall.target= params[:target]
+    newcall.caller_ID = params[:callerID]
     newcall.was_connected = 'In Progress'
     newcall.menuTime = 'In Progress'
     newcall.session = params[:session]
