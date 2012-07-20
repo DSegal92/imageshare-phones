@@ -7,7 +7,7 @@ default from: "postmaster@vigilantnotifier.mailgun.org"
     @call = Call.find_by_session(sessionID)
     @target = target
     @caller = caller
-    url = 'http://imageshare-phones.herokuapp.com/admin/calls/' + @call.id_to.s + '/edit'
+    url = 'http://imageshare-phones.herokuapp.com/admin/calls/' + @call.id.to_s + '/edit'
   	mail(to: 'DSegal92@gmail.com', :subject => "New Call for " + target)
   end
 
