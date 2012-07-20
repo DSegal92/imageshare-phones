@@ -51,7 +51,7 @@ ActiveAdmin.register Call do
      f.input :answered, :label => "Answered By"
      f.input :caller_ID, :label => link_to("Caller ID", '/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID)
      f.input :menuTime, :label => "Call Length (s)"
-     f.input :site, :as => :select, :collection => ["A", "B", "C", "D", "E"]
+     f.input :site, :as => :select, :collection => call.getSites
      f.input :location 
      f.input :notes
      f.input :was_connected
@@ -93,8 +93,6 @@ ActiveAdmin.register Call do
       tr
       th 'Notes'
       td call.notes
-      th 'testing'
-      td call.getSites
     end        
   end
 end 
