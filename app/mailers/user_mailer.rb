@@ -3,8 +3,7 @@ class UserMailer < ActionMailer::Base
 default from: "postmaster@vigilantnotifier.mailgun.org"
   		  
 
-  def incomingCall(email, target, caller, sessionID)
-  	@email = email
+  def incomingCall(target, caller, sessionID)
     @call = Call.find_by_session(sessionID)
     @target = target
     @caller = caller

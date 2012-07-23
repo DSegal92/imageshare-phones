@@ -63,11 +63,7 @@ class CallsController < ApplicationController
     newcall.menuTime = 'In Progress'
     newcall.session = params[:session]
     newcall.save
-    callGroup = Group.find_by_identity(params[:target])
-    callGroup.phones.each do |phone|
-      email = ['email']
-      UserMailer.incomingCall(email, params[:target], params[:callerID], params[:session]).deliver
-    end  
+    UserMailer.incomingCall(params[:target], params[:callerID], params[:session]).deliver
   end
 
  
