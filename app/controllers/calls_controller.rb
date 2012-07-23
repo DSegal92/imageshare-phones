@@ -25,7 +25,7 @@ class CallsController < ApplicationController
         if count >= group.phones.size
           count = 0
         end
-        render :json => {:name => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
+        render :json => {:name => group['identity'], :identity => group.phones[count]['identity'], :count => count, :test => group.phones }
           group.incrCounter(group)
       # If no group matches time, but a phone matches extension return phone
       elsif phone
@@ -64,8 +64,10 @@ class CallsController < ApplicationController
     newcall.session = params[:session]
     newcall.save
     callGroup = Group.find_by_identity(params[:target])
-    email = callGroup.phones[0]['email']
-      UserMailer.incomingCall(email, params[:target], params[:callerID], params[:session]).deliver  
+    callGroup.phones.each do |phone|
+      email = ['email']
+      UserMailer.incomingCall(email, params[:target], params[:callerID], params[:session]).deliver
+    end  
   end
 
  
