@@ -4,6 +4,7 @@ ActiveAdmin.register Phone do
 		column :identity
 		column :number
 		column :extension
+		column :email
 		default_actions
 	end
 
@@ -12,6 +13,7 @@ ActiveAdmin.register Phone do
 			f.input :identity
 			f.input :extension
 			f.input :number
+			f.input :email
 			f.input :groups , :as => :check_boxes, :member_label => :identity
 		end
 		f.buttons
