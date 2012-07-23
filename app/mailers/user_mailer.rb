@@ -8,7 +8,7 @@ default from: "postmaster@vigilantnotifier.mailgun.org"
     @target = target
     @caller = caller
     @url = 'http://imageshare-phones.herokuapp.com/admin/calls/' + @call.id.to_s + '/edit'
-  	mail(to: 'tech@vigilantmedical.net', :subject => "New Call for " + target)
+  	mail(to: 'phones@vigilantmedical.net', :subject => "New Call for " + target)
   end
 
    
