@@ -25,7 +25,7 @@ class CallsController < ApplicationController
         if count >= group.phones.size
           count = 0
         end
-        render :json => {:identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
+        render :json => {:name => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
           group.incrCounter(group)
       # If no group matches time, but a phone matches extension return phone
       elsif phone
@@ -66,11 +66,6 @@ class CallsController < ApplicationController
     UserMailer.incomingCall(params[:target], params[:callerID], params[:session]).deliver    
   end
 
-  def getSites
-  data = @http.get "/calls/" + ext.to_s, {}
-  JSON.parse(data)
-end
-
-  
+ 
 
  end
