@@ -64,10 +64,8 @@ class CallsController < ApplicationController
     newcall.session = params[:session]
     newcall.save
     callGroup = Group.find_by_identity(params[:target])
-    callGroup.each do |phone|
-      email = phone.email
+    email = callGroup.phones[0]['email']
       UserMailer.incomingCall(email, params[:target], params[:callerID], params[:session]).deliver  
-    end  
   end
 
  
