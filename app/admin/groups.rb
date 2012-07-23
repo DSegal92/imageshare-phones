@@ -1,7 +1,8 @@
 ActiveAdmin.register Group do
    form do |f|
     f.inputs do
-      f.input :identity
+      f.input :identity, :label => "External Name (Identity)"
+      f.input :alias, :label => "Internal Name (Alias)"
       f.input :extension
       f.input :startTime, :label => "Start Time (0-23)", :input_html => {:value => 0}
       f.input :endTime, :label => "End Time (0-23)", :input_html => {:value => 23}
@@ -16,6 +17,7 @@ ActiveAdmin.register Group do
   index do
     column :id
     column :identity
+    column :alias
     column :extension
     column :startTime
     column :endTime
@@ -28,6 +30,7 @@ ActiveAdmin.register Group do
   show do |ad|
   attributes_table do
   h2 b group.identity
+  h3 b group.alias
   h3 'Phones'
   table do
   	thead do
