@@ -3,10 +3,9 @@ ActiveAdmin.register Group do
     f.inputs do
       f.input :identity
       f.input :extension
-      f.input :email
       f.input :startTime, :label => "Start Time (1-24)"
       f.input :endTime, :label => "End Time (1-24)"
-      f.input :counter
+      f.input :counter, :input_html => {:value => 0}
       f.input :phones, :member_label => :identity, :as => :check_boxes
       f.input :enable
       
@@ -18,7 +17,6 @@ ActiveAdmin.register Group do
     column :id
     column :identity
     column :extension
-    column :email
     column :startTime
     column :endTime
     column "Enabled" do |group|
