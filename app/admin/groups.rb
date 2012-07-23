@@ -3,8 +3,8 @@ ActiveAdmin.register Group do
     f.inputs do
       f.input :identity
       f.input :extension
-      f.input :startTime, :label => "Start Time (1-24)"
-      f.input :endTime, :label => "End Time (1-24)"
+      f.input :startTime, :label => "Start Time (0-23)", :input_html => {:value => 0}
+      f.input :endTime, :label => "End Time (0-23)", :input_html => {:value => 23}
       f.input :counter, :input_html => {:value => 0}
       f.input :phones, :member_label => :identity, :as => :check_boxes
       f.input :enable
