@@ -25,7 +25,7 @@ class CallsController < ApplicationController
         if count >= group.phones.size
           count = 0
         end
-        render :json => {:name => group['identity'], :identity => group.phones[count]['identity'], :count => count, :test => group.phones }
+        render :json => {:name => group['identity'], :identity => group.phones[count]['identity'], :count => count, :number => group.phones[count]['number'] }
           group.incrCounter(group)
       # If no group matches time, but a phone matches extension return phone
       elsif phone
