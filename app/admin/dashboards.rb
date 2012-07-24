@@ -28,7 +28,7 @@ ActiveAdmin::Dashboards.build do
       end
       tbody do
         count = group.counter 
-        td group.phones[count-1].identity
+        td group.phones[count].identity
       end
       end
     end  
