@@ -9,6 +9,7 @@ gem "activeadmin"
 gem "formtastic", "~> 2.1.1"
 gem 'tropo-webapi-ruby'
 gem 'json'
+gem 'squeel'
 
 group :production do
 	gem 'pg'

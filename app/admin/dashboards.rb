@@ -4,14 +4,15 @@ ActiveAdmin::Dashboards.build do
       column(:caller_ID)
       column(:answered)
     end
- end
-  section "Active Groups" do
-     table_for Group.where(:enable => true).order('id desc').limit(10).each do |group|
+  end
+  section "Currently Active Groups" do
+    time = Time.now.hour  
+    table_for Group.find_all_by_enable(true).select{|g| g.startTime <= time && g.endTime >= time} do
       column(:identity)
       column(:alias)
       column(:startTime)
       column(:endTime)
-   end
+    end
   end
 
   # Define your dashboard sections here. Each block will be
