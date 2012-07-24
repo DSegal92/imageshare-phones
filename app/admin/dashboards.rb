@@ -7,8 +7,8 @@ ActiveAdmin::Dashboards.build do
     end
   end
   section "Currently Active Groups" do
-    
-    table_for Group.find_all_by_enable(true).select{|g| g.startTime <= time && g.endTime >= time} do
+    groups = Group.find_all_by_enable(true).select{|g| g.startTime <= time && g.endTime >= time}.sort_by{|x| x.extension}
+    table_for groups do
       column(:identity)
       column(:extension)
       column(:alias)
@@ -22,7 +22,7 @@ ActiveAdmin::Dashboards.build do
 
   section "Next Called" do
     table do       
-       groups = Group.find_all_by_enable(true).select{|g| g.startTime <= time && g.endTime >= time}.each do |group|
+       groups = Group.find_all_by_enable(true).select{|g| g.startTime <= time && g.endTime >= time}.sort_by{|x| x.extension}.each do |group|
       thead do 
         th group.identity
       end
