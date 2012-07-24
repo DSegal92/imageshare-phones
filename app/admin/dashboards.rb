@@ -12,6 +12,9 @@ ActiveAdmin::Dashboards.build do
       column(:alias)
       column(:startTime)
       column(:endTime)
+      column "Phones" do |group|
+        group.phones.collect! { |x| x.number + " - " + x.identity}.to_a
+      end
     end
   end
   # Define your dashboard sections here. Each block will be
