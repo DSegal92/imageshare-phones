@@ -14,8 +14,34 @@ ActiveAdmin::Dashboards.build do
       column(:alias)
       column(:startTime)
       column(:endTime)
-      column "Phones" do |group|
-        group.phones.collect! { |x| x.number + " - " + x.identity}.to_a
+      #column "Phones" do |group|
+      #  group.phones.collect! { |x| x.number + " - " + x.identity}
+      #end
+    end
+  end
+
+  section "Phones in Groups" do
+    groups = Group.find(:all)
+    phones = Phone.find(:all)
+    table do
+      thead do
+        th
+        groups.each do |group|
+          th group.identity
+        end
+      end
+      tbody do
+        phones.each do |phone|
+          tr
+            td phone.identity
+            groups.each do |group|
+              if group.phones.exists?(phone.id)
+                td "\u2713"
+              else
+                td "\u2718"
+              end                           
+            end
+        end
       end
     end
   end
