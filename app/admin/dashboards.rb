@@ -1,4 +1,5 @@
 ActiveAdmin::Dashboards.build do
+  time = Time.now.hour  
   section "Recent Calls", :priority => 2 do
     table_for Call.order('id desc').limit(10).each do |call|
       column(:caller_ID)
@@ -6,9 +7,10 @@ ActiveAdmin::Dashboards.build do
     end
   end
   section "Currently Active Groups" do
-    time = Time.now.hour  
+    
     table_for Group.find_all_by_enable(true).select{|g| g.startTime <= time && g.endTime >= time} do
       column(:identity)
+      column(:extension)
       column(:alias)
       column(:startTime)
       column(:endTime)
@@ -17,6 +19,21 @@ ActiveAdmin::Dashboards.build do
       end
     end
   end
+
+  section "Next Called" do
+    table do       
+       groups = Group.find_all_by_enable(true).select{|g| g.startTime <= time && g.endTime >= time}.each do |group|
+      thead do 
+        th group.identity
+      end
+      tbody do
+        count = group.counter 
+        td group.phones[count-1].identity
+      end
+      end
+    end  
+    end
+
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just
   # return the content which you would like to display.
