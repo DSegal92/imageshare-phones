@@ -42,9 +42,6 @@ ActiveAdmin.register Call do
       end
     end
     column :was_connected
-    column "Called On" do |call|
-      call.called_on
-    end
     column :created_at
     column :updated_at
     default_actions
@@ -63,7 +60,6 @@ ActiveAdmin.register Call do
      f.input :site, :as => :select, :collection => call.getSites
      f.input :location 
      f.input :notes
-     f.input :called_on
      f.input :was_connected
      
    end

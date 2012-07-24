@@ -1,7 +1,7 @@
 require 'net/http'
 
 class Call < ActiveRecord::Base
-  attr_accessible :answered, :caller_ID, :location, :notes, :origin, :target, :was_connected, :menuTime, :timesCalled, :site, :called_on
+  attr_accessible :answered, :caller_ID, :location, :notes, :origin, :target, :was_connected, :menuTime, :timesCalled, :site
   def getTime(time)
   	time = time.to_i
 	hours = (time / 3600)
