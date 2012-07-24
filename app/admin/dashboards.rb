@@ -36,7 +36,7 @@ ActiveAdmin::Dashboards.build do
             td phone.identity
             groups.each do |group|
               if group.phones.exists?(phone.id)
-                td "\u2713"
+                td "\u2714"
               else
                 td "\u2718"
               end                           
