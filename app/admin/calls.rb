@@ -1,3 +1,5 @@
+Time.zone = 'Eastern Time (US & Canada)'  
+
 ActiveAdmin.register Call do
   index do
   	column :id
@@ -39,7 +41,7 @@ ActiveAdmin.register Call do
         call.notes.truncate(10)
       end
     end
-    column :was_connected
+    column :was_connected   
     column :created_at
     column :updated_at
     default_actions
@@ -49,7 +51,11 @@ ActiveAdmin.register Call do
    f.inputs do
      f.input :target
      f.input :answered, :label => "Answered By"
+    if call.caller_ID.nil?
+      f.input :caller_ID, :label => "Caller ID"
+    else
      f.input :caller_ID, :label => link_to("Caller ID", '/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID, :target => '_blank')
+   end
      f.input :menuTime, :label => "Call Length (s)"
      f.input :site, :as => :select, :collection => call.getSites
      f.input :location 
