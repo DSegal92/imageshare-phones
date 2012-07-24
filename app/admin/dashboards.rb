@@ -1,9 +1,9 @@
 ActiveAdmin::Dashboards.build do
   time = Time.now.hour  
   section "Recent Calls", :priority => 2 do
-    table_for Call.order('id desc').limit(10).each do |call|
-      column(:caller_ID)
-      column(:answered)
+    table_for Call.order('id desc').limit(10).each do
+      column("Caller ID") {|call| link_to(call.caller_ID, '/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID) } 
+      column("Answered By")  {|call| call.answered  } 
     end
   end
   section "Currently Active Groups" do
@@ -33,6 +33,7 @@ ActiveAdmin::Dashboards.build do
       end
     end  
     end
+
 
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just
