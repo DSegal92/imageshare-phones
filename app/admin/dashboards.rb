@@ -6,8 +6,9 @@ ActiveAdmin::Dashboards.build do
     end
  end
   section "Active Groups" do
-     table_for Group.order('id desc').limit(10).each do |group|
+     table_for Group.where(:enable => true).order('id desc').limit(10).each do |group|
       column(:identity)
+      column(:alias)
       column(:startTime)
       column(:endTime)
    end
