@@ -51,7 +51,7 @@ class CallsController < ApplicationController
     newcall.was_connected = params[:connected]
     newcall.menuTime = params[:time]
     newcall.session = params[:session]
-    newcall.called_on = DateTime.now.to_date.to_s
+    newcall.called_on = DateTime.now.month
     newcall.save	
   end
 
