@@ -43,7 +43,7 @@ ActiveAdmin.register Call do
     end
     column :was_connected
     column "Called On" do |call|
-      Call.getDate(call.called_on)
+      call.called_on
     end
     column :created_at
     column :updated_at
