@@ -2,7 +2,7 @@ Time.zone = 'Eastern Time (US & Canada)'
 
 ActiveAdmin.register Call do
   index do
-  	column :id
+    column :id
   	column "Target", :sortable => :target do |call|
       unless call.target.nil?
         @searchURL = '/admin/calls?&q%5Btarget_contains%5D=' + call.target
@@ -41,7 +41,7 @@ ActiveAdmin.register Call do
         call.notes.truncate(10)
       end
     end
-    column :was_connected   
+    column :was_connected
     column :created_at
     column :updated_at
     default_actions

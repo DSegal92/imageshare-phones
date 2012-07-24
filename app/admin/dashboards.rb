@@ -1,4 +1,17 @@
 ActiveAdmin::Dashboards.build do
+  section "Recent Calls", :priority => 2 do
+    table_for Call.order('id desc').limit(10).each do |call|
+      column(:caller_ID)
+      column(:answered)
+    end
+ end
+  section "Active Groups" do
+     table_for Group.order('id desc').limit(10).each do |group|
+      column(:identity)
+      column(:startTime)
+      column(:endTime)
+   end
+  end
 
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just
