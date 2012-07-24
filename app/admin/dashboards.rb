@@ -1,4 +1,5 @@
 ActiveAdmin::Dashboards.build do
+
   time = Time.now.hour  
   section "Recent Calls", :priority => 2 do
     table_for Call.order('id desc').limit(10).each do
@@ -21,9 +22,10 @@ ActiveAdmin::Dashboards.build do
   end
 
   section "Phones in Groups" do
+    
     groups = Group.find(:all)
     phones = Phone.find(:all)
-    table do
+    table :class => "center" do
       thead do
         th
         groups.each do |group|
@@ -34,7 +36,7 @@ ActiveAdmin::Dashboards.build do
         phones.each do |phone|
           tr
             td phone.identity
-            groups.each do |group|
+            groups.each do |group|             
               if group.phones.exists?(phone.id)
                 td "\u2714"
               else
@@ -44,6 +46,7 @@ ActiveAdmin::Dashboards.build do
         end
       end
     end
+ 
   end
 
   section "Next Called" do
