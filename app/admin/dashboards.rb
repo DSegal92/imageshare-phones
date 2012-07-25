@@ -16,23 +16,11 @@ ActiveAdmin::Dashboards.build do
       column(:extension)
       column(:alias)
       column "Start Time " do |group|
-      if group.start
-        if group.start.min < 10
-          group.start.hour.to_s + ":0" + group.start.min.to_s
-        else
-          group.start.hour.to_s + ":" + group.start.min.to_s
-        end
+        group.formatTime(group.start)
       end
-    end
-    column "End Time" do |group|
-      if group.endT
-       if group.endT.min < 10
-          group.endT.hour.to_s + ":0" + group.endT.min.to_s
-        else
-          group.endT.hour.to_s + ":" + group.endT.min.to_s
-        end
+      column "End Time" do |group|
+        group.formatTime(group.endT)
       end
-    end
     end
   end
 
