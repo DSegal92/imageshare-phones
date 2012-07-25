@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724161140) do
+ActiveRecord::Schema.define(:version => 20120725162036) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -89,6 +89,9 @@ ActiveRecord::Schema.define(:version => 20120724161140) do
     t.integer  "counter"
     t.boolean  "enable"
     t.string   "alias"
+    t.datetime "startT"
+    t.time     "start"
+    t.time     "endT"
   end
 
   create_table "groups_phones", :id => false, :force => true do |t|

@@ -1,13 +1,15 @@
+Time.zone = 'Eastern Time (US & Canada)'  
+
 ActiveAdmin.register Group do
    form do |f|
     f.inputs do
       f.input :identity, :label => "External Name (Identity)"
       f.input :alias, :label => "Internal Name (Alias)"
       f.input :extension
-      f.input :startTime, :label => "Start Time (0-23)", :input_html => {:value => 0}
-      f.input :endTime, :label => "End Time (0-23)", :input_html => {:value => 23}
       f.input :counter, :input_html => {:value => 0}
       f.input :phones, :member_label => :identity, :as => :check_boxes
+      f.input :start, :as => :datetime, :ignore_date => true, :hint => "Insert arbitrary values for first 3 dropdowns- Date is Ignored"
+      f.input :endT, :as => :datetime, :ignore_date => true, :hint => "Insert arbitrary values for first 3 dropdowns- Date is Ignored"
       f.input :enable
       
     end
@@ -19,8 +21,24 @@ ActiveAdmin.register Group do
     column :identity
     column :alias
     column :extension
-    column :startTime
-    column :endTime
+    column "Start Time " do |group|
+      if group.start
+        if group.start.min < 10
+          group.start.hour.to_s + ":0" + group.start.min.to_s
+        else
+          group.start.hour.to_s + ":" + group.start.min.to_s
+        end
+      end
+    end
+    column "End Time" do |group|
+      if group.endT
+       if group.endT.min < 10
+          group.endT.hour.to_s + ":0" + group.endT.min.to_s
+        else
+          group.endT.hour.to_s + ":" + group.endT.min.to_s
+        end
+      end
+    end
     column "Enabled" do |group|
       group.enable
     end

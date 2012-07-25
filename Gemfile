@@ -6,10 +6,12 @@ gem 'rails', '3.2.5'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem "activeadmin"
+#Update Formtastic Once Activeadmin supports 2.2.1 so that :time_select is accessible
 gem "formtastic", "~> 2.1.1"
 gem 'tropo-webapi-ruby'
 gem 'json'
 gem 'squeel'
+gem 'jquery-rails'
 
 group :production do
 	gem 'pg'

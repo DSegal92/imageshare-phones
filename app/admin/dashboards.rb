@@ -1,23 +1,38 @@
 ActiveAdmin::Dashboards.build do
 
-  time = Time.now.hour  
+  
   section "Recent Calls", :priority => 2 do
     table_for Call.order('id desc').limit(10).each do
       column("Caller ID") {|call| link_to(call.caller_ID, '/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID) } 
       column("Answered By")  {|call| call.answered  } 
     end
   end
+
   section "Currently Active Groups" do
-    groups = Group.find_all_by_enable(true).select{|g| g.startTime <= time && g.endTime >= time}.sort_by{|x| x.extension}
+    compTime = Time.now.hour.to_f + (Time.now.min)/100.to_f
+    groups = Group.find_all_by_enable(true).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime}.sort_by{|x| x.extension}
     table_for groups do
       column(:identity)
       column(:extension)
       column(:alias)
-      column(:startTime)
-      column(:endTime)
-      #column "Phones" do |group|
-      #  group.phones.collect! { |x| x.number + " - " + x.identity}
-      #end
+      column "Start Time " do |group|
+      if group.start
+        if group.start.min < 10
+          group.start.hour.to_s + ":0" + group.start.min.to_s
+        else
+          group.start.hour.to_s + ":" + group.start.min.to_s
+        end
+      end
+    end
+    column "End Time" do |group|
+      if group.endT
+       if group.endT.min < 10
+          group.endT.hour.to_s + ":0" + group.endT.min.to_s
+        else
+          group.endT.hour.to_s + ":" + group.endT.min.to_s
+        end
+      end
+    end
     end
   end
 
@@ -50,8 +65,9 @@ ActiveAdmin::Dashboards.build do
   end
 
   section "Next Called" do
+    compTime = Time.now.hour.to_f + (Time.now.min)/100.to_f
     table do       
-       groups = Group.find_all_by_enable(true).select{|g| g.startTime <= time && g.endTime >= time}.sort_by{|x| x.extension}.each do |group|
+       groups = Group.find_all_by_enable(true).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime}.sort_by{|x| x.extension}.each do |group|
       thead do 
         th group.identity
       end

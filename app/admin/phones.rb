@@ -2,7 +2,7 @@ ActiveAdmin.register Phone do
 	index do
 		column :id
 		column :identity
-		column :number
+		column :number, :as => :phone
 		column :extension
 		column :email
 		default_actions

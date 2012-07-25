@@ -61,10 +61,11 @@ ActiveAdmin.register Call do
      f.input :location 
      f.input :notes
      f.input :was_connected
-     
    end
    f.buttons
  end
+
+
 
  show do |ad|
   attributes_table do
