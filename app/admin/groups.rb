@@ -30,7 +30,7 @@ ActiveAdmin.register Group do
         end
       end
     end
-    column "End Time" do |group|
+    column "End Time" do |group|g
       if group.endT
        if group.endT.min < 10
           group.endT.hour.to_s + ":0" + group.endT.min.to_s
@@ -39,7 +39,6 @@ ActiveAdmin.register Group do
         end
       end
     end
-    f.input :days, :as => :text
     column "Enabled" do |group|
       group.enable
     end
