@@ -39,6 +39,7 @@ ActiveAdmin.register Group do
         end
       end
     end
+    f.input :days, :as => :text
     column "Enabled" do |group|
       group.enable
     end

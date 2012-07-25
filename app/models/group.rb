@@ -12,4 +12,8 @@ class Group < ActiveRecord::Base
      group.save
      puts "Incremented counter for group " + group.counter.to_s
   end 
+
+  def getDays
+    days = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
+  end
  end
