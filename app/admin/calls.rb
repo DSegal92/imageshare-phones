@@ -63,6 +63,7 @@ ActiveAdmin.register Call do
      f.input :was_connected
    end
    f.buttons
+
  end
 
 
@@ -102,6 +103,7 @@ ActiveAdmin.register Call do
       td call.notes
     end        
   end
+ 
 end 
 
 end

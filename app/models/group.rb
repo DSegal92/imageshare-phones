@@ -24,8 +24,4 @@ class Group < ActiveRecord::Base
       time = t.hour.to_s + ':' + t.min.to_s
     end
   end
-
-  def getDays
-    days = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
-  end
  end

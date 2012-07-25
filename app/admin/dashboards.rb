@@ -22,10 +22,7 @@ ActiveAdmin::Dashboards.build do
         group.formatTime(group.endT)
       end
     end
-  end
-
-  section "Phones in Groups" do
-    
+  
     groups = Group.find(:all)
     phones = Phone.find(:all)
     table :class => "center" do
@@ -48,8 +45,7 @@ ActiveAdmin::Dashboards.build do
             end
         end
       end
-    end
- 
+    end 
   end
 
   section "Next Called" do
