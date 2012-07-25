@@ -30,7 +30,7 @@ ActiveAdmin.register Group do
         end
       end
     end
-    column "End Time" do |group|g
+    column "End Time" do |group|
       if group.endT
        if group.endT.min < 10
           group.endT.hour.to_s + ":0" + group.endT.min.to_s
