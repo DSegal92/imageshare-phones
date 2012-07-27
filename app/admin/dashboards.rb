@@ -23,7 +23,7 @@ ActiveAdmin::Dashboards.build do
       end
     end
   
-    groups = Group.find(:all)
+    groups = Group.find_all_by_enable(true)
     phones = Phone.find(:all)
     table :class => "center" do
       thead do
@@ -37,9 +37,9 @@ ActiveAdmin::Dashboards.build do
           tr
             td phone.identity
             groups.each do |group|             
-              if group.phones.exists?(phone.id)
+              if group.phones.exists?(phone.id) && group.enable
                 td "\u2714"
-              else
+              elsif !group.phones.exists?(phone.id) && group.enable
                 td "\u2718"
               end                           
             end
@@ -53,7 +53,7 @@ ActiveAdmin::Dashboards.build do
     table do       
        groups = Group.find_all_by_enable(true).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime}.sort_by{|x| x.extension}.each do |group|
       thead do 
-        th "Test"
+        th group.identity
       end
       tbody do
         count = group.counter 
