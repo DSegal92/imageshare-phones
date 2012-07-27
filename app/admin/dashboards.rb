@@ -53,10 +53,14 @@ ActiveAdmin::Dashboards.build do
     table do       
        groups = Group.find_all_by_enable(true).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime}.sort_by{|x| x.extension}.each do |group|
       thead do 
-        th group.identity
+        th "Test"
       end
       tbody do
         count = group.counter 
+        if group.phones[count].nil?
+          group.counter = 0
+          count = group.counter
+        end
         td group.phones[count].identity
       end
       end
