@@ -49,7 +49,7 @@ class CallsController < ApplicationController
 
   def finishCall
     newcall = Call.find_by_session(params[:session])
-    newcall.answered= params[:answered]
+    newcall.answered= Phone.find_by_identity(params[:answered]).id
     newcall.target= Group.find_by_identity(params[:target]).id
     newcall.caller_ID = params[:callerID]
     newcall.was_connected = params[:connected]

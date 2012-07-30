@@ -12,7 +12,9 @@ ActiveAdmin.register Call do
     column "Answered By", :sortable => :answered do |call|
       unless call.answered.nil?
         @searchURL = '/admin/calls?&q%5Banswered_contains%5D=' + call.answered
-        link_to call.answered, @searchURL
+        unless call.answered == "Hang Up"
+          link_to Phone.find_by_id(call.answered).identity, @searchURL
+        end
       end
     end 
     column "Caller ID", :sortable => :caller_ID do |call|
@@ -50,7 +52,7 @@ ActiveAdmin.register Call do
   form do |f|
    f.inputs do
      f.input :target, :as => :select, :collection => Group.find(:all), :member_label => :identity
-     f.input :answered, :label => "Answered By"
+     f.input :answered, :as => :select, :collection => Phone.find(:all), :member_label => :identity, :label => "Answered By"
     if call.caller_ID.nil?
       f.input :caller_ID, :label => "Caller ID"
     else
