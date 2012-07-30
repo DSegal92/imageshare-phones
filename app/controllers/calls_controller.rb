@@ -7,7 +7,8 @@ class CallsController < ApplicationController
     if Call.where(:caller_ID => params[:caller_ID]).where(:created_at => group.callback.days.ago..Time.now).exists?
       call = Call.where(:caller_ID => params[:caller_ID]).where(:created_at => group.callback.days.ago..Time.now).first()
       phone = Phone.find_by_identity(call.answered)
-      render :json => {:name => call.target + "(Callback)", :identity => call.answered, :number => phone.number, :callback => group.callback}
+      render :json => {:name => call.target + " (Callback)", :identity => call.answered, :number => phone.number, :callback => group.callback}
+      UserMailer.callBack(phone.email, params[:callerID], call.notes, params[:session]).deliver
     else
       compTime = Time.now.hour.to_f + (Time.now.min)/100.to_f
       group_now = Group.find_all_by_extension(params[:id]).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime}
