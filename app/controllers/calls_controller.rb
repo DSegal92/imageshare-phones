@@ -16,7 +16,7 @@ class CallsController < ApplicationController
         if count >= group.phones.size
           count = 0
         end
-        render :json => {:name => group['identity'], :identity => group.phones[count]['identity'], :size => group.phones.size, :number => group.phones[count]['number'] }
+        render :json => {:callerID => params[:caller_ID], :name => group['identity'], :identity => group.phones[count]['identity'], :size => group.phones.size, :number => group.phones[count]['number']}
           group.incrCounter(group)
       # Else if only one group exists, check if it matches the current time
       elsif group && group.enable && (group.start.hour.to_f + (group.start.min)/100.to_f <= compTime) && (group.endT.hour.to_f + (group.endT.min)/100.to_f >= compTime)
