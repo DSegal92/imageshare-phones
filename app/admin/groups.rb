@@ -7,6 +7,7 @@ ActiveAdmin.register Group do
       f.input :alias, :label => "Internal Name (Alias)"
       f.input :extension
       f.input :counter, :input_html => {:value => 0}
+      f.input :callback, :label => "Callback Time", :hint => "Number of days a caller should return to the first person they spoke to"
       f.input :phones, :member_label => :identity, :as => :check_boxes
       f.input :start, :as => :datetime, :ignore_date => true, :hint => "Insert arbitrary values for first 3 dropdowns- Date is Ignored"
       f.input :endT, :as => :datetime, :ignore_date => true, :hint => "Insert arbitrary values for first 3 dropdowns- Date is Ignored"
@@ -21,6 +22,7 @@ ActiveAdmin.register Group do
     column :identity
     column :alias
     column :extension
+    column :callback
     column "Start Time " do |group|
       group.formatTime(group.start)
     end
