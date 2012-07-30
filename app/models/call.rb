@@ -28,7 +28,23 @@ class Call < ActiveRecord::Base
   	#result = JSON.parse(cmd)
   	#resp = Net::HTTP.get_response("static.sharemedicalimages.com", "/admin/site/list")
   	#@result = JSON.parse(resp.body)
-  	sites = ["wmc", "urmc", "symetis", "sibley", "jhm-uae", "geisinger", "proxy", "lexheart", "mtsmc", "jhuqca", "icls", "pinehurst", "uf", "fallon", "advocate", "uams", "mayo", "cvc", "mhyork", "cumberland", "sparks", "gbmc", "aahs", "beebemed", "cnmc", "choa", "austinheart", "arheart", "cairo", "directflow", "baylor", "miami", "hays", "mhi", "ucsd", "hsh", "lacard", "jefferson", "dhmc", "penn", "umich", "nus", "lvhn", "whcrad", "scripps", "uva", "imageshare", "usc", "umh", "ace", "cumc", "cchvc", "duke", "cic", "jhnccu", "mmc", "whc", "mycvimage", "shvi", "jhcardio", "mct", "upmc", "tauberg", "loudoun", "wsh", "yh", "nyph", "wcmc", "wpahs", "ccf", "umm", "abbott", "stanford", "cchs", "tmmc", "mah", "ca", "hms", "peace", "dev", "ucla", "wah", "swedish", "nmr", "wustl", "prmc", "sfhc", "huh", "suttermc", "phsj", "fcvmed", "bsc", "ctag", "emory", "edwards", "rush", "medtronic", "cshi", "pia", "jhneuro", "cth", "static", "uc"].sort().map {|x| x.upcase }
+  	sites = ["wmc", "urmc", "symetis", "sibley", "jhm-uae", "geisinger", "proxy", "lexheart", "mtsmc", "jhuqca", 
+      "icls", "pinehurst", "uf", "fallon", "advocate", "uams", "mayo", "cvc", "mhyork", "cumberland", "sparks", 
+      "gbmc", "aahs", "beebemed", "cnmc", "choa", "austinheart", "arheart", "cairo", "directflow", "baylor", 
+      "miami", "hays", "mhi", "ucsd", "hsh", "lacard", "jefferson", "dhmc", "penn", "umich", "nus", "lvhn", 
+      "whcrad", "scripps", "uva", "imageshare", "usc", "umh", "ace", "cumc", "cchvc", "duke", "cic", "jhnccu", 
+      "mmc", "whc", "mycvimage", "shvi", "jhcardio", "mct", "upmc", "tauberg", "loudoun", "wsh", "yh", "nyph", 
+      "wcmc", "wpahs", "ccf", "umm", "abbott", "stanford", "cchs", "tmmc", "mah", "ca", "hms", "peace", "dev", 
+      "ucla", "wah", "swedish", "nmr", "wustl", "prmc", "sfhc", "huh", "suttermc", "phsj", "fcvmed", "bsc", "ctag", 
+      "emory", "edwards", "rush", "medtronic", "cshi", "pia", "jhneuro", "cth", "static", "uc"]
+    sites.each do |site|
+      if site.length <= 4
+        site = site.upcase!
+      else
+        site = site.capitalize!
+      end
+    end
+  sites.sort()
   end
   
   def self.getDate
