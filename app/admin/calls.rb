@@ -49,8 +49,8 @@ ActiveAdmin.register Call do
 
   form do |f|
    f.inputs do
-     f.input :target, :as => :select, :collection => Group.find(:all), :member_label => :identity
-     f.input :answered, :as => :select, :collection => Phone.find(:all), :member_label => :identity, :label => "Answered By"
+     f.input :target, :as => :select, :collection => Group.find(:all).sort!{|a,b| a.identity <=> b.identity }, :member_label => :identity
+     f.input :answered, :as => :select, :collection => Phone.find(:all).sort!{|a,b| a.identity <=> b.identity }, :member_label => :identity, :label => "Answered By"
     if call.caller_ID.nil?
       f.input :caller_ID, :label => "Caller ID"
     else
