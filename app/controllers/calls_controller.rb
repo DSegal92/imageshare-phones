@@ -4,8 +4,8 @@ class CallsController < ApplicationController
 
   def show
     group = Group.find_by_extension(params[:id])
-    if Call.where(:caller_ID => params[:caller_ID]).where(:target => group.identity).where(:created_at => group.callback.days.ago..Time.now).exists?
-      call = Call.where(:caller_ID => params[:caller_ID]).where(:target => group.identity).where(:created_at => group.callback.days.ago..Time.now).first()
+    if Call.where(:caller_ID => "4188363618").where(:target => group.identity).where(:created_at => 1.days.ago..Time.now).where(:was_connected => true).exists?
+      call = Call.where(:caller_ID => params[:caller_ID]).where(:target => group.identity).where(:created_at => group.callback.days.ago..Time.now).where(:was_connected => true).first()
       phone = Phone.find_by_identity(call.answered)
       render :json => {:name => call.target, :identity => call.answered, :number => phone.number, :callback => group.callback}
     else
