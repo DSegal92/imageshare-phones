@@ -5,15 +5,18 @@ This repository contains all of the files necessary for the Vigilant Medical pho
 == Call Logic
 
 When a call comes in from Tropo, the extension and Caller ID are passed to the Rails application. From there, the decision making is as follows:
-    If the call's Caller ID matches another recent call (definition of recent controlled by callback variable in groups), it is routed to the last person the caller spoke to.
+    If the call's Caller ID matches another recent call (definition of recent controlled by callback variable in groups),
+     it is routed to the last person the caller spoke to.
 
-    Otherwise, the system looks for a group matching the supplied extension that is also valid for the current time. If it finds one, it will cycle through the phones in the group until somebody picks up or the caller hangs up.
+    Otherwise, the system looks for a group matching the supplied extension that is also valid for the current time.
+     If it finds one, it will cycle through the phones in the group until somebody picks up or the caller hangs up.
 
-    If there is no group for the supplied extension, or no groups are currently active, the system looks for a phone with the supplied extension.
+    If there is no group for the supplied extension, or no groups are currently active, the system looks for a phone 
+    with the supplied extension.
 
     If no groups or phones are found, the caller is asked to provide another extension.
 
 == Notes
-  - Start & Endtimes in groups are Time objects, but ActiveAdmin only currently supports an older version of Formtastic which doesn't work with Time objects. To fix this, they are selected as DateTimes and the Dates are entered arbitrarily, should be fixed with the next version of ActiveAdmin
+- Start & Endtimes in groups are Time objects, but ActiveAdmin only currently supports an older version of Formtastic which doesn't work with Time objects. To fix this, they are selected as DateTimes and the Dates are entered arbitrarily, should be fixed with the next version of ActiveAdmin
 
-  - Sites are currently hard-coded into calls, but can in the future be fetched as JSON from static.sharemedicalimages.com/admin/site/list
+- Sites are currently hard-coded into calls, but can in the future be fetched as JSON from static.sharemedicalimages.com/admin/site/list
