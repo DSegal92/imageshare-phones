@@ -51,12 +51,8 @@ ActiveAdmin.register Call do
    f.inputs do
      f.input :target, :as => :select, :collection => Group.find(:all).sort!{|a,b| a.identity <=> b.identity }, :member_label => :identity
      f.input :answered, :as => :select, :collection => Phone.find(:all).sort!{|a,b| a.identity <=> b.identity }, :member_label => :identity, :label => "Answered By"
-    if call.caller_ID.nil?
-      f.input :caller_ID, :label => "Caller ID"
-    else
-     f.input :caller_ID, :label => link_to("Caller ID", '/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID, :target => '_blank')
-   end
-     f.input :menuTime, :label => "Call Length (s)"
+     f.input :caller_ID, :label => link_to("Caller ID", '/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID, :target => '_blank'), :input_html => { :readonly => true }
+     f.input :menuTime, :label => "Call Length (s)", :input_html => { :readonly => true }
      f.input :site, :as => :select, :collection => call.getSites
      f.input :location 
      f.input :notes
@@ -73,9 +69,9 @@ ActiveAdmin.register Call do
     table do
       tr
       th 'Target'
-      td call.target
+      td Group.find_by_id(call.target).identity
       th 'Answered By'
-      td call.answered
+      td Phone.find_by_id(call.answered).identity
       tr
       th 'Caller ID'
       td call.caller_ID
