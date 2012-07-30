@@ -12,9 +12,7 @@ ActiveAdmin.register Call do
     column "Answered By", :sortable => :answered do |call|
       unless call.answered.nil?
         @searchURL = '/admin/calls?&q%5Banswered_contains%5D=' + call.answered
-        unless call.answered == "Hang Up"
-          link_to Phone.find_by_id(call.answered).identity, @searchURL
-        end
+        link_to Phone.find_by_id(call.answered).identity, @searchURL
       end
     end 
     column "Caller ID", :sortable => :caller_ID do |call|

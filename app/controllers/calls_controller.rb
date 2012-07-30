@@ -60,7 +60,7 @@ class CallsController < ApplicationController
 
   def startCall
     newcall = Call.new
-    newcall.answered= 'In Progress'
+    newcall.answered= '123'
     newcall.target= Group.find_by_identity(params[:target]).id
     newcall.caller_ID = params[:callerID]
     newcall.was_connected = 'In Progress'
