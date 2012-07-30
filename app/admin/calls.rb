@@ -6,7 +6,7 @@ ActiveAdmin.register Call do
   	column "Target", :sortable => :target do |call|
       unless call.target.nil?
         @searchURL = '/admin/calls?&q%5Btarget_contains%5D=' + call.target
-        link_to call.target, @searchURL
+        link_to Group.find_by_id(call.target).identity, @searchURL
       end
     end
     column "Answered By", :sortable => :answered do |call|
@@ -49,7 +49,7 @@ ActiveAdmin.register Call do
 
   form do |f|
    f.inputs do
-     f.input :target
+     f.input :target, :as => :select, :collection => Group.find(:all), :member_label => :identity
      f.input :answered, :label => "Answered By"
     if call.caller_ID.nil?
       f.input :caller_ID, :label => "Caller ID"
