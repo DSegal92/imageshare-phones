@@ -1,23 +1,26 @@
 Time.zone = 'Eastern Time (US & Canada)'  
 
 ActiveAdmin.register Call do
+  scope :connected_calls
+  scope :hang_ups
   index do
+    @preface = '/admin/calls?&q%5B'
     column :id
   	column "Target", :sortable => :target do |call|
       unless call.target.nil?
-        @searchURL = '/admin/calls?&q%5Btarget_contains%5D=' + call.target
+        @searchURL = @preface + 'target_contains%5D=' + call.target
         link_to Group.find_by_id(call.target).identity, @searchURL
       end
     end
     column "Answered By", :sortable => :answered do |call|
       unless call.answered.nil?
-        @searchURL = '/admin/calls?&q%5Banswered_contains%5D=' + call.answered
+        @searchURL = @preface + 'answered_contains%5D=' + call.answered
         link_to Phone.find_by_id(call.answered).identity, @searchURL
       end
     end 
     column "Caller ID", :sortable => :caller_ID do |call|
       unless call.caller_ID.nil?
-        @searchURL = '/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID
+        @searchURL = @preface + 'caller_ID_contains%5D=' + call.caller_ID
         link_to call.caller_ID, @searchURL
       end
     end
@@ -31,7 +34,7 @@ ActiveAdmin.register Call do
     end 
     column "Site", :sortable => :site do |call|
       unless call.site.nil?
-        @searchURL = '/admin/calls?&q%5Blocation_contains%5D=' + call.site
+        @searchURL = @preface + 'location_contains%5D=' + call.site
         link_to call.site, @searchURL
       end
     end
