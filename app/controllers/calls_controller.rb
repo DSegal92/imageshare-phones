@@ -43,7 +43,7 @@ class CallsController < ApplicationController
         render :json => {:name => phone["identity"], :identity => phone["identity"], :number => phone["number"]}
       # If no groups or phone match extension
       else
-        render :json => {:number => false}
+        render :json => {:number => false} 
       end   
     end
   end
