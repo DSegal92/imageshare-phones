@@ -1,4 +1,5 @@
 Time.zone = 'Eastern Time (US & Canada)'  
+compTime = Time.now.hour.to_f + (Time.now.min)/100.to_f
 
 ActiveAdmin.register Group do
    form do |f|
@@ -29,8 +30,15 @@ ActiveAdmin.register Group do
     column "End Time" do |group|
       group.formatTime(group.endT)
     end
-    column "Status" do |group|
-      status_tag (group.enable ? "Enabled" : "Disabled"), (group.enable ? :ok : :error)
+    column "Status" do |g|
+     active = (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime
+      if active && g.enable
+        status_tag ("Active"), (:ok)
+      elsif !active && g.enable
+        status_tag ("Inactive"), (:warning)
+      else
+        status_tag ("Disabled"), (:error)
+      end
     end
     default_actions
   end  
