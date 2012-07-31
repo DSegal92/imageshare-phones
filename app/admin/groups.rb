@@ -13,7 +13,7 @@ ActiveAdmin.register Group do
       f.input :start, :as => :datetime, :ignore_date => true, :hint => "Insert arbitrary values for first 3 dropdowns- Date is Ignored"
       f.input :endT, :as => :datetime, :ignore_date => true, :hint => "Insert arbitrary values for first 3 dropdowns- Date is Ignored"
       f.input :enable
-      f.input :days
+      f.input :days, :as => :check_boxes
       
     end
     f.buttons
