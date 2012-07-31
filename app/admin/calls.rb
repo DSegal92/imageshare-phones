@@ -2,7 +2,7 @@ Time.zone = 'Eastern Time (US & Canada)'
 
 ActiveAdmin.register Call do
   scope :connected_calls
-  default_scope :all
+  scope :all
   scope :hang_ups
 
   index do
@@ -46,7 +46,9 @@ ActiveAdmin.register Call do
         call.notes.truncate(10)
       end
     end
-    column :was_connected
+    #column "Was Connected" do |call|
+    #  status_tag (call.was_connected ? true : false), (call.was_connected ? :ok : :error)
+    #end  
     column :created_at
     column :updated_at
     default_actions
