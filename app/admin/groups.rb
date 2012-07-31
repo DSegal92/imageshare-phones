@@ -29,7 +29,7 @@ ActiveAdmin.register Group do
     column "End Time" do |group|
       group.formatTime(group.endT)
     end
-    column "Enabled" do |group|
+    column "Status" do |group|
       status_tag (group.enable ? "Enabled" : "Disabled"), (group.enable ? :ok : :error)
     end
     default_actions
