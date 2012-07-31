@@ -32,11 +32,16 @@ ActiveAdmin.register Group do
       group.formatTime(group.endT)
     end
     column "Status" do |g|
+    day = Time.now.wday
     compTime = Time.now.hour.to_f + (Time.now.min)/100.to_f
      active = (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime
-      if active && g.enable
+      if active && g.enable && g.days.exists?(:value => day)
         status_tag ("Active"), (:ok)
-      elsif !active && g.enable
+      elsif !active && g.enable && g.days.exists?(:value => day)
+        status_tag ("Inactive"), (:warning)
+      elsif active && g.enable && !g.days.exists?(:value => day)
+        status_tag ("Inactive"), (:warning)
+      elsif !active && g.enable && !g.days.exists?(:value => day)
         status_tag ("Inactive"), (:warning)
       else
         status_tag ("Disabled"), (:error)
