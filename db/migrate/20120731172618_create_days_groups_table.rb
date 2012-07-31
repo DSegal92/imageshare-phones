@@ -11,4 +11,4 @@ class CreateDaysGroupsTable < ActiveRecord::Migration
   def self.down
     drop_table :days_groups
   end
-end
+end 
