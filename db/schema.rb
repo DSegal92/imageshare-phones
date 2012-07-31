@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730152850) do
+ActiveRecord::Schema.define(:version => 20120731173023) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -77,6 +77,21 @@ ActiveRecord::Schema.define(:version => 20120730152850) do
     t.datetime "called_on"
   end
 
+  create_table "days", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "value"
+  end
+
+  create_table "days_groups", :id => false, :force => true do |t|
+    t.integer "day_id"
+    t.integer "group_id"
+  end
+
+  add_index "days_groups", ["day_id", "group_id"], :name => "index_days_groups_on_day_id_and_group_id"
+  add_index "days_groups", ["group_id", "day_id"], :name => "index_days_groups_on_group_id_and_day_id"
+
   create_table "groups", :force => true do |t|
     t.string   "identity"
     t.integer  "phone_id"
@@ -94,6 +109,14 @@ ActiveRecord::Schema.define(:version => 20120730152850) do
     t.time     "endT"
     t.integer  "callback"
   end
+
+  create_table "groups_days", :id => false, :force => true do |t|
+    t.integer "group_id"
+    t.integer "day_id"
+  end
+
+  add_index "groups_days", ["day_id", "group_id"], :name => "index_groups_days_on_day_id_and_group_id"
+  add_index "groups_days", ["group_id", "day_id"], :name => "index_groups_days_on_group_id_and_day_id"
 
   create_table "groups_phones", :id => false, :force => true do |t|
     t.integer "group_id"
