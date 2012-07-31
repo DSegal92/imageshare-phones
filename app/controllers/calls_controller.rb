@@ -11,7 +11,7 @@ class CallsController < ApplicationController
       render :json => {:name => call.target, :identity => call.answered, :number => phone.number, :callback => group.callback}
     else
       compTime = Time.now.hour.to_f + (Time.now.min)/100.to_f
-      group_now = Group.find_all_by_extension(params[:id]).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime}
+      group_now = Group.find_all_by_extension(params[:id]).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime && g.days.exists?(:value => day)}
       phone = Phone.find_by_extension(params[:id])
       # Check if group w/ extension exists
       if group
@@ -25,7 +25,7 @@ class CallsController < ApplicationController
           render :json => {:type => "Normal", :callerID => params[:caller_ID], :name => group['identity'], :identity => group.phones[count]['identity'], :size => group.phones.size, :number => group.phones[count]['number']}
             group.incrCounter(group)
         # Else if only one group exists, check if it matches the current time
-        elsif group && group.enable && (group.start.hour.to_f + (group.start.min)/100.to_f <= compTime) && (group.endT.hour.to_f + (group.endT.min)/100.to_f >= compTime)
+        elsif group && group.enable && (group.start.hour.to_f + (group.start.min)/100.to_f <= compTime) && (group.endT.hour.to_f + (group.endT.min)/100.to_f >= compTime) && group.days.exists?(:value => day)
           count = group.counter
           if count >= group.phones.size
             count = 0
@@ -43,7 +43,7 @@ class CallsController < ApplicationController
         render :json => {:name => phone["identity"], :identity => phone["identity"], :number => phone["number"]}
       # If no groups or phone match extension
       else
-        render :json => {:number => false} 
+        render :json => {:number => false}
       end   
     end
   end
