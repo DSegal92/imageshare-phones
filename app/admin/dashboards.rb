@@ -35,7 +35,9 @@ ActiveAdmin::Dashboards.build do
       tbody do
         phones.each do |phone|
           tr
-            td phone.identity
+            unless phone.number == '0000000000'
+              td phone.identity
+            end
             groups.each do |group|             
               if group.phones.exists?(phone.id) && group.enable && phone.number != '0000000000'
                 td "\u2714"
