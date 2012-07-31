@@ -46,9 +46,9 @@ ActiveAdmin.register Call do
         call.notes.truncate(10)
       end
     end
-    #column "Was Connected" do |call|
-    #  status_tag (call.was_connected ? true : false), (call.was_connected ? :ok : :error)
-    #end  
+    column "Was Connected" do |call|
+     status_tag (call.was_connected ? "Answered" : "Hung Up"), (call.was_connected ? :ok : :error)
+    end  
     column :created_at
     column :updated_at
     default_actions
