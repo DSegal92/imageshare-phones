@@ -47,7 +47,7 @@ ActiveAdmin.register Call do
       end
     end
     column "Was Connected" do |call|
-      if call.answered == '4'
+      if call.answered == Phone.find_by_identity("In Progress").id.to_s
         status_tag ("In Progress"), (:warning)
       else
         status_tag (call.was_connected ? "Answered" : "Hung Up"), (call.was_connected ? :ok : :error)
