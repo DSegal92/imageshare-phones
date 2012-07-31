@@ -5,6 +5,7 @@ class Call < ActiveRecord::Base
 
   scope :connected_calls, where(:was_connected => true)
   scope :hang_ups, where(:was_connected => false)
+  scope :all
 
   def getTime(time)
   	time = time.to_i

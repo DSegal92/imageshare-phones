@@ -2,7 +2,9 @@ Time.zone = 'Eastern Time (US & Canada)'
 
 ActiveAdmin.register Call do
   scope :connected_calls
+  scope :all
   scope :hang_ups
+
   index do
     @preface = '/admin/calls?&q%5B'
     column :id
