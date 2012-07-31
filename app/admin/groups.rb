@@ -30,7 +30,7 @@ ActiveAdmin.register Group do
       group.formatTime(group.endT)
     end
     column "Enabled" do |group|
-      group.enable
+      status_tag (group.enable ? "Enabled" : "Disabled"), (call.was_connected ? :ok : :error)
     end
     default_actions
   end  
