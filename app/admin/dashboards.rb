@@ -4,7 +4,7 @@ ActiveAdmin::Dashboards.build do
   section "Recent Calls", :priority => 2 do
     table_for Call.order('id desc').limit(10).each do
       column("Caller ID") {|call| link_to(call.caller_ID, '/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID) } 
-      column("Answered By")  {|call| call.answered  } 
+      column("Answered By")  {|call| Phone.find_by_id(call.answered).identity  } 
     end
   end
 
