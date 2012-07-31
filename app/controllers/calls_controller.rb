@@ -15,7 +15,7 @@ class CallsController < ApplicationController
         call = Call.where(:caller_ID => params[:caller_ID]).where(:target => group.id.to_s).where(:created_at => group.callback.days.ago..Time.now).where(:was_connected => true).first()
         phone = Phone.find_by_id(call.answered)
         render :json => {:name => call.target, :identity => call.answered, :number => phone.number, :callback => group.callback}
-      end
+     
       # If multiple groups exist, check for one matching the current time
       elsif group_now && group_now.size > 0 && group.enable
         group = group_now[0]
@@ -45,6 +45,7 @@ class CallsController < ApplicationController
     # If no groups or phone match extension
     else
       render :json => {:number => false}
+    end
     end   
   end
 
