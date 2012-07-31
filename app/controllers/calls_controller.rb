@@ -45,7 +45,6 @@ class CallsController < ApplicationController
     # If no groups or phone match extension
     else
       render :json => {:number => false}
-    end
     end   
   end
 
