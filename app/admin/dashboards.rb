@@ -1,4 +1,6 @@
-ActiveAdmin::Dashboards.build do  
+ActiveAdmin::Dashboards.build do
+
+  
   section "Recent Calls", :priority => 2 do
     table_for Call.order('id desc').limit(10).each do
       column("Caller ID") {|call| link_to(call.caller_ID, '/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID) } 
@@ -7,8 +9,9 @@ ActiveAdmin::Dashboards.build do
   end
 
   section "Currently Active Groups" do
+    day = Time.now.wday
     compTime = Time.now.hour.to_f + (Time.now.min)/100.to_f
-    groups = Group.find_all_by_enable(true).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime}.sort_by{|x| x.extension}
+    groups = Group.find_all_by_enable(true).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime && g.days.exists?(:value => day)}.sort_by{|x| x.extension}
     table_for groups do
       column(:identity)
       column(:extension)
@@ -27,7 +30,9 @@ ActiveAdmin::Dashboards.build do
       thead do
         th
         groups.each do |group|
+          if group.days.exists?(:value => day)
           th group.identity
+        end
         end
       end
       tbody do
@@ -37,9 +42,9 @@ ActiveAdmin::Dashboards.build do
               td phone.identity
             end
             groups.each do |group|             
-              if group.phones.exists?(phone.id) && group.enable && phone.number != '0000000000'
+              if group.phones.exists?(phone.id) && group.enable && phone.number != '0000000000' && group.days.exists?(:value => day)
                 td "\u2714"
-              elsif !group.phones.exists?(phone.id) && group.enable && phone.number != '0000000000'
+              elsif !group.phones.exists?(phone.id) && group.enable && phone.number != '0000000000' && group.days.exists?(:value => day)
                 td "\u2718"
               end                           
             end
@@ -49,9 +54,10 @@ ActiveAdmin::Dashboards.build do
   end
 
   section "Next Called" do
+    day = Time.now.wday
     compTime = Time.now.hour.to_f + (Time.now.min)/100.to_f
     table do       
-       groups = Group.find_all_by_enable(true).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime}.sort_by{|x| x.extension}.each do |group|
+       groups = Group.find_all_by_enable(true).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime && g.days.exists?(:value => day)}.sort_by{|x| x.extension}.each do |group|
       thead do 
         th group.identity
       end
@@ -66,4 +72,6 @@ ActiveAdmin::Dashboards.build do
       end
     end  
     end
+
+
 end

@@ -12,8 +12,8 @@ ActiveAdmin.register Group do
       f.input :phones, :member_label => :identity, :as => :check_boxes
       f.input :start, :as => :datetime, :ignore_date => true, :hint => "Insert arbitrary values for first 3 dropdowns- Date is Ignored"
       f.input :endT, :as => :datetime, :ignore_date => true, :hint => "Insert arbitrary values for first 3 dropdowns- Date is Ignored"
-      f.input :enable
       f.input :days, :as => :check_boxes
+      f.input :enable
       
     end
     f.buttons
