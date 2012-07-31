@@ -47,7 +47,11 @@ ActiveAdmin.register Call do
       end
     end
     column "Was Connected" do |call|
-     status_tag (call.was_connected ? "Answered" : "Hung Up"), (call.was_connected ? :ok : :error)
+      if call.answered == '4'
+        status_tag ("In Progress"), (:warning)
+      else
+        status_tag (call.was_connected ? "Answered" : "Hung Up"), (call.was_connected ? :ok : :error)
+      end
     end  
     column :created_at
     column :updated_at
@@ -58,7 +62,9 @@ ActiveAdmin.register Call do
    f.inputs do
      f.input :target, :as => :select, :collection => Group.find(:all).sort!{|a,b| a.identity <=> b.identity }, :member_label => :identity
      f.input :answered, :as => :select, :collection => Phone.find(:all).sort!{|a,b| a.identity <=> b.identity }, :member_label => :identity, :label => "Answered By"
-     f.input :caller_ID, :label => link_to("Caller ID", '/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID, :target => '_blank'), :input_html => { :readonly => true }
+     unless call.caller_ID.nil?
+      f.input :caller_ID, :label => link_to("Caller ID", '/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID, :target => '_blank'), :input_html => { :readonly => true }
+    end
      f.input :menuTime, :label => "Call Length (s)", :input_html => { :readonly => true }
      f.input :site, :as => :select, :collection => call.getSites
      f.input :location 
