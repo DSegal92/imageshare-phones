@@ -7,6 +7,7 @@ class Call < ActiveRecord::Base
   scope :hang_ups, where(:was_connected => false)
   scope :all
 
+  # Converts time to prettier formation xx:xx:xx
   def getTime(time)
   	time = time.to_i
 	hours = (time / 3600)
@@ -28,6 +29,7 @@ class Call < ActiveRecord::Base
 	
   end
 
+  # Will fetch and display Sites. For now hardcoded, but can be retrieved once website response is fixed
   def getSites
   	#cmd = %x[curl static.sharemedicalimages.com/admin/site/list]
   	#result = JSON.parse(cmd)
@@ -42,6 +44,7 @@ class Call < ActiveRecord::Base
       "wcmc", "wpahs", "ccf", "umm", "abbott", "stanford", "cchs", "tmmc", "mah", "ca", "hms", "peace", "dev", 
       "ucla", "wah", "swedish", "nmr", "wustl", "prmc", "sfhc", "huh", "suttermc", "phsj", "fcvmed", "bsc", "ctag", 
       "emory", "edwards", "rush", "medtronic", "cshi", "pia", "jhneuro", "cth", "static", "uc"]
+    # Formats sites roughly, assuming anything 4 or less characters are acronyms
     sites.each do |site|
       if site.length <= 4
         site = site.upcase!
@@ -51,14 +54,5 @@ class Call < ActiveRecord::Base
     end
   sites.sort()
   end
-  
-  def self.getDate
-  	if self.called_on
-  	called = self.called_on.to_date
-  end
-  end
-
-  def self.total_on(date) 
-  	Call.find_all_by_was_connected(true).size
-  end
 end
+  

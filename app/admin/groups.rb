@@ -9,7 +9,7 @@ ActiveAdmin.register Group do
       f.input :extension
       f.input :counter, :input_html => {:value => 0}
       f.input :callback, :label => "Callback Time", :hint => "Number of days a caller should return to the first person they spoke to"
-      f.input :phones, :member_label => :identity, :as => :check_boxes
+      f.input :phones, :member_label => :identity, :as => :check_boxes, :hint => "Hang Up and In Progress are only used internally, don't add them to groups"
       f.input :start, :as => :datetime, :ignore_date => true, :hint => "Insert arbitrary values for first 3 dropdowns- Date is Ignored"
       f.input :endT, :as => :datetime, :ignore_date => true, :hint => "Insert arbitrary values for first 3 dropdowns- Date is Ignored"
       f.input :days, :as => :check_boxes, :class => "test"

@@ -11,17 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120731173023) do
+ActiveRecord::Schema.define(:version => 20120802182342) do
 
   create_table "active_admin_comments", :force => true do |t|
-    t.string   "resource_id",   :null => false
-    t.string   "resource_type", :null => false
-    t.integer  "author_id"
-    t.string   "author_type"
-    t.text     "body"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.string   "namespace"
+    t.string    "resource_id",   :null => false
+    t.string    "resource_type", :null => false
+    t.integer   "author_id"
+    t.string    "author_type"
+    t.text      "body"
+    t.timestamp "created_at",    :null => false
+    t.timestamp "updated_at",    :null => false
+    t.string    "namespace"
   end
 
   add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
@@ -29,59 +29,59 @@ ActiveRecord::Schema.define(:version => 20120731173023) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
   create_table "admin_users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.string    "email",                  :default => "", :null => false
+    t.string    "encrypted_password",     :default => "", :null => false
+    t.string    "reset_password_token"
+    t.timestamp "reset_password_sent_at"
+    t.timestamp "remember_created_at"
+    t.integer   "sign_in_count",          :default => 0
+    t.timestamp "current_sign_in_at"
+    t.timestamp "last_sign_in_at"
+    t.string    "current_sign_in_ip"
+    t.string    "last_sign_in_ip"
+    t.timestamp "created_at",                             :null => false
+    t.timestamp "updated_at",                             :null => false
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
   create_table "answered_calls", :force => true do |t|
-    t.string   "identity"
-    t.boolean  "was_target"
-    t.string   "elapsed"
-    t.integer  "call_id"
-    t.integer  "phone_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string    "identity"
+    t.boolean   "was_target"
+    t.string    "elapsed"
+    t.integer   "call_id"
+    t.integer   "phone_id"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
   end
 
   create_table "calls", :force => true do |t|
-    t.string   "target"
-    t.string   "origin"
-    t.string   "length"
-    t.integer  "times_called"
-    t.boolean  "was_connected"
-    t.string   "caller_ID"
-    t.string   "location"
-    t.text     "notes"
-    t.integer  "answered_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.string   "answered"
-    t.integer  "menuLength"
-    t.integer  "timesCalled"
-    t.string   "site"
-    t.string   "menuTime"
-    t.string   "session"
-    t.datetime "called_on"
+    t.string    "target"
+    t.string    "origin"
+    t.string    "length"
+    t.integer   "times_called"
+    t.boolean   "was_connected"
+    t.string    "caller_ID"
+    t.string    "location"
+    t.text      "notes"
+    t.integer   "answered_id"
+    t.timestamp "created_at",    :null => false
+    t.timestamp "updated_at",    :null => false
+    t.string    "answered"
+    t.integer   "menuLength"
+    t.integer   "timesCalled"
+    t.string    "site"
+    t.string    "menuTime"
+    t.string    "session"
+    t.timestamp "called_on"
   end
 
   create_table "days", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "value"
+    t.string    "name"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
+    t.integer   "value"
   end
 
   create_table "days_groups", :id => false, :force => true do |t|
@@ -93,21 +93,20 @@ ActiveRecord::Schema.define(:version => 20120731173023) do
   add_index "days_groups", ["group_id", "day_id"], :name => "index_days_groups_on_group_id_and_day_id"
 
   create_table "groups", :force => true do |t|
-    t.string   "identity"
-    t.integer  "phone_id"
-    t.integer  "extension"
-    t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "startTime"
-    t.integer  "endTime"
-    t.integer  "counter"
-    t.boolean  "enable"
-    t.string   "alias"
-    t.datetime "startT"
-    t.time     "start"
-    t.time     "endT"
-    t.integer  "callback"
+    t.string    "identity"
+    t.integer   "phone_id"
+    t.integer   "extension"
+    t.string    "email"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
+    t.integer   "startTime"
+    t.integer   "endTime"
+    t.integer   "counter"
+    t.boolean   "enable"
+    t.string    "alias"
+    t.time      "start"
+    t.time      "endT"
+    t.integer   "callback"
   end
 
   create_table "groups_days", :id => false, :force => true do |t|
@@ -127,13 +126,22 @@ ActiveRecord::Schema.define(:version => 20120731173023) do
   add_index "groups_phones", ["phone_id", "group_id"], :name => "index_groups_phones_on_phone_id_and_group_id"
 
   create_table "phones", :force => true do |t|
-    t.string   "identity"
-    t.string   "number"
-    t.integer  "extension"
+    t.string    "identity"
+    t.string    "number"
+    t.integer   "extension"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
+    t.boolean   "enable"
+    t.string    "email"
+  end
+
+  create_table "tropo_settings", :force => true do |t|
+    t.text     "welcome"
+    t.text     "choices"
+    t.string   "song"
+    t.integer  "timeout"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.boolean  "enable"
-    t.string   "email"
   end
 
 end

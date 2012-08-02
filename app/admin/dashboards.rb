@@ -1,6 +1,6 @@
 ActiveAdmin::Dashboards.build do
 
-  
+  # Displays 10 more recent calls, with CallerIDs (linked to calls)
   section "Recent Calls", :priority => 2 do
     table_for Call.order('id desc').limit(10).each do
       column("Caller ID") {|call| link_to(call.caller_ID, '/admin/calls?&q%5Bcaller_ID_contains%5D=' + call.caller_ID) } 
@@ -8,8 +8,10 @@ ActiveAdmin::Dashboards.build do
     end
   end
 
+  # Displays currently active groups based on time and day of week -- displays who is in each group. 
   section "Currently Active Groups" do
     day = Time.now.wday
+    # compTime converts current time to decimal to compare to group time. Temporary hack until Time objects aren't selected as datetimes.
     compTime = Time.now.hour.to_f + (Time.now.min)/100.to_f
     groups = Group.find_all_by_enable(true).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime && g.days.exists?(:value => day)}.sort_by{|x| x.extension}
     table_for groups do
@@ -23,7 +25,7 @@ ActiveAdmin::Dashboards.build do
         group.formatTime(group.endT)
       end
     end
-  
+    # Grid of active groups v. phones
     groups = Group.find_all_by_enable(true)
     phones = Phone.find(:all)
     table :class => "center" do
@@ -53,6 +55,7 @@ ActiveAdmin::Dashboards.build do
     end 
   end
 
+  # Heads up of who is 'on deck' for next call in each active category without affecting counter
   section "Next Called" do
     day = Time.now.wday
     compTime = Time.now.hour.to_f + (Time.now.min)/100.to_f

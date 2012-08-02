@@ -2,15 +2,22 @@ class CallsController < ApplicationController
   def index
   end
 
+    # Handles all call logic
   def show
+    
+
+    # Constants used for comparisons
     group = Group.find_by_extension(params[:id])
     phone = Phone.find_by_extension(params[:id])
     day = Time.now.wday
     compTime = Time.now.hour.to_f + (Time.now.min)/100.to_f
     group_now = Group.find_all_by_extension(params[:id]).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime && g.days.exists?(:value => day)}
     phone = Phone.find_by_extension(params[:id])
+
+
     # Check if group w/ extension exists
     if group 
+      # If a call has come in for the group within the group's callback days, skips rest of logic to redirect to the last called person
       if Call.where(:caller_ID => params[:caller_ID]).where(:target => group.id.to_s).where(:created_at => group.callback.days.ago..Time.now).where(:was_connected => true).exists?
         call = Call.where(:caller_ID => params[:caller_ID]).where(:target => group.id.to_s).where(:created_at => group.callback.days.ago..Time.now).where(:was_connected => true).first()
         phone = Phone.find_by_id(call.answered)
@@ -48,6 +55,7 @@ class CallsController < ApplicationController
     end   
   end
 
+  # POST, from Tropo app when callers disconnect
   def finishCall
     newcall = Call.find_by_session(params[:session])
     newcall.answered= Phone.find_by_identity(params[:answered]).id
@@ -59,6 +67,7 @@ class CallsController < ApplicationController
     newcall.save  
   end
 
+  # POST, runs as soon as caller chooses extension
   def startCall
     newcall = Call.new
     newcall.answered= Phone.find_by_extension('123').id
