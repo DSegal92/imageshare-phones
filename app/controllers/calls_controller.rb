@@ -10,7 +10,7 @@ class CallsController < ApplicationController
     group_now = Group.find_all_by_extension(params[:id]).select{|g| (g.start.hour.to_f + (g.start.min)/100.to_f) <= compTime && (g.endT.hour.to_f + (g.endT.min)/100.to_f) >= compTime && g.days.exists?(:value => day)}
     phone = Phone.find_by_extension(params[:id])
     # Check if group w/ extension exists
-    if group
+    if group 
       if Call.where(:caller_ID => params[:caller_ID]).where(:target => group.id.to_s).where(:created_at => group.callback.days.ago..Time.now).where(:was_connected => true).exists?
         call = Call.where(:caller_ID => params[:caller_ID]).where(:target => group.id.to_s).where(:created_at => group.callback.days.ago..Time.now).where(:was_connected => true).first()
         phone = Phone.find_by_id(call.answered)

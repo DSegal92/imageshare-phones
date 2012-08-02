@@ -1,6 +1,6 @@
 class Group < ActiveRecord::Base
   attr_accessible :email, :extension, :identity, :phone_id, :group, :phone_ids, :startTime, :endTime, :counter, :enable, :alias, :start, :endT, :callback, :day_ids
-  validates_presence_of :identity, :extension
+  validates_presence_of :identity, :extension, :phones
   
   has_and_belongs_to_many :phones
   has_and_belongs_to_many :days
