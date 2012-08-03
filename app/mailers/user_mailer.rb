@@ -7,7 +7,7 @@ default from: "postmaster@vigilantnotifier.mailgun.org"
     @call = Call.find_by_session(sessionID)
     @target = target
     @caller = caller
-    @url = 'http://imageshare-phones.herokuapp.com/admin/calls/' + @call.id.to_s + '/edit'
+    @url = 'http://imageshare-phones.herokuapp.com/admin/calls/' + @call.id.to_s + '/edit?initialCall=true'
   	mail(to: Group.find_by_identity(target).phones.map(&:email), :subject => "New Call for " + target)
   end
 
@@ -16,7 +16,7 @@ default from: "postmaster@vigilantnotifier.mailgun.org"
   	@email = email
   	@callerID = callerID
   	@notes = notes
-  	@url = 'http://imageshare-phones.herokuapp.com/admin/calls/' + @call.id.to_s + '/edit'
+  	@url = 'http://imageshare-phones.herokuapp.com/admin/calls/' + @call.id.to_s + '/edit?initialCall=true'
   	mail(to: @email, :subject => "New Callback from" + callerID)
   end
    
