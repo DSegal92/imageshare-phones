@@ -1,12 +1,12 @@
 == Vigilant Phone System
 
-This repository contains all of the files necessary for the Vigilant Medical phone system. The system is based off of a Tropo script (Tropo.rb), and contains logic in the calls_controller for deciding where a call goes.
+This repository contains all of the files necessary for the Vigilant Medical phone system. The system is based off of a Tropo script (TropoScript.rb), and contains logic in the calls_controller for deciding where a call goes.
 
 == Call Logic
 
 When a call comes in from Tropo, the extension and Caller ID are passed to the Rails application. From there, the decision making is as follows:
-    If the call's Caller ID matches another recent call (definition of recent controlled by callback variable in groups),
-     it is routed to the last person the caller spoke to.
+    If the call's Caller ID matches another recent call for the same group (definition of recent controlled by callback 
+    variable in groups), it is routed to the last person the caller spoke to.
 
     Otherwise, the system looks for a group matching the supplied extension that is also valid for the current time.
      If it finds one, it will cycle through the phones in the group until somebody picks up or the caller hangs up.
